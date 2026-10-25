@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Dominio/Dominio.csproj" Id="cb621989-26e6-4d01-9e52-b2d647cd7468" />
+  <Project Path="Negocio/Negocio.csproj" Id="4eb515d9-ca5a-4d05-adc4-926cc8ea5b26" />
+  <Project Path="WebApplication1/WebApplication1.csproj" Id="6cacc128-e0e2-4a48-902e-7ca83f81aa9c" />
+</Solution>
