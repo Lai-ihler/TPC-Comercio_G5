@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Negocio;
 
 namespace WebApplication1
 {
@@ -11,7 +12,13 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                ClienteNegocio cn = new ClienteNegocio();
 
+                gvClientes.DataSource = cn.listar();
+                gvClientes.DataBind();
+            }
         }
     }
 }
