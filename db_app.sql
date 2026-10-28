@@ -1,7 +1,7 @@
 CREATE DATABASE APP_WEB_DB;
-
+GO
 USE APP_WEB_DB;
-
+GO
 CREATE TABLE PERFIL
 (
     ID INT PRIMARY KEY IDENTITY(1, 1),
@@ -16,7 +16,7 @@ CREATE TABLE CLIENTE
     Dni VARCHAR(9) NOT NULL UNIQUE
         CHECK (LEN(Dni) >= 7),
     Email VARCHAR(100) NOT NULL
-        CHECK (Email LIKE '%_@_%._'),
+        CHECK (Email LIKE '%_@_%._%'),
     Telefono VARCHAR(20) NOT NULL,
     Direccion VARCHAR(50) NOT NULL,
     Activo BIT NOT NULL
@@ -29,7 +29,7 @@ CREATE TABLE PROVEEDOR
     Cuit VARCHAR(11) NOT NULL UNIQUE
         CHECK (LEN(Cuit) = 11),
     Email VARCHAR(100) NOT NULL
-        CHECK (Email LIKE '%_@_%._'),
+        CHECK (Email LIKE '%_@_%._%'),
     Telefono VARCHAR(20) NOT NULL,
     Direccion VARCHAR(50) NOT NULL,
     Activo BIT NOT NULL
@@ -44,7 +44,7 @@ CREATE TABLE USUARIO
     Nombre VARCHAR(30) NOT NULL,
     Apellido VARCHAR(30) NOT NULL,
     Email VARCHAR(100) NOT NULL
-        CHECK (Email LIKE '%_@_%._'),
+        CHECK (Email LIKE '%_@_%._%'),
     Perfil INT NOT NULL
         CONSTRAINT FK_Usuario_IdPerfil
         FOREIGN KEY (Perfil)
@@ -164,3 +164,8 @@ CREATE TABLE VENTA_DETALLE
         CHECK (PrecioUnitario > 0),
     Subtotal AS (Cantidad * PrecioUnitario)
 );
+
+INSERT INTO CLIENTE (Nombre, Apellido, Dni, Email, Telefono, Direccion, Activo) VALUES
+('Juan', 'Perez', '30123456', 'juan.perez@gmail.com', '1145671234', 'Av. Libertador 1200', 1),
+('María', 'Gómez', '28987654', 'mgomez@hotmail.com', '1156782345', 'San Martín 450', 1),
+('Carlos', 'López', '35456789', 'clopez@yahoo.com', '1167893456', 'Belgrano 890', 1);
