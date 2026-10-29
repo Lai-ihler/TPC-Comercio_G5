@@ -17,10 +17,10 @@
                 <a class="nav-link active" aria-current="page" href="#">Inicio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Clientes</a>
+                <a class="nav-link" href="Clientes.aspx">Clientes</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Algo-1</a>
+                <a class="nav-link" href="Productos.aspx">Productos</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link disabled" aria-disabled="true">Algo-2</a>
