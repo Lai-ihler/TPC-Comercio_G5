@@ -14,13 +14,20 @@
         <div>
             <ul class="nav nav-underline">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                <a class="nav-link active" aria-current="page" href="Default.aspx">Inicio</a>
+                  <%--  HREF va a la pagina de inicio no importa donde estemos a diferencia del # se quedaria en la misma pag --%>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="Clientes.aspx">Clientes</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="Productos.aspx">Productos</a>
+              </li>
+               <li class="nav-item">
+                <a class="nav-link" href="Marcas.aspx">Marcas</a>
+              </li>
+               <li class="nav-item">
+                <a class="nav-link" href="Categorias.aspx">Categorías</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link disabled" aria-disabled="true">Algo-2</a>

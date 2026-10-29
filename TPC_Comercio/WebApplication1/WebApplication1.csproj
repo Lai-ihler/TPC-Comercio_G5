@@ -67,19 +67,52 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Categorias.aspx" />
     <Content Include="Clientes.aspx" />
+    <Content Include="Default.aspx" />
+    <Content Include="FormularioCategoria.aspx" />
+    <Content Include="FormularioMarca.aspx" />
     <Content Include="FormularioProducto.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Marcas.aspx" />
     <Content Include="Productos.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Categorias.aspx.cs">
+      <DependentUpon>Categorias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Categorias.aspx.designer.cs">
+      <DependentUpon>Categorias.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Clientes.aspx.cs">
       <DependentUpon>Clientes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Clientes.aspx.designer.cs">
       <DependentUpon>Clientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormularioCategoria.aspx.cs">
+      <DependentUpon>FormularioCategoria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormularioCategoria.aspx.designer.cs">
+      <DependentUpon>FormularioCategoria.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormularioMarca.aspx.cs">
+      <DependentUpon>FormularioMarca.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormularioMarca.aspx.designer.cs">
+      <DependentUpon>FormularioMarca.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormularioProducto.aspx.cs">
       <DependentUpon>FormularioProducto.aspx</DependentUpon>
@@ -90,6 +123,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Marcas.aspx.cs">
+      <DependentUpon>Marcas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Marcas.aspx.designer.cs">
+      <DependentUpon>Marcas.aspx</DependentUpon>
     </Compile>
     <Compile Include="MasterPage.Master.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
