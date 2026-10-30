@@ -30,7 +30,7 @@
                 <a class="nav-link" href="Categorias.aspx">Categorías</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled" aria-disabled="true">Algo-2</a>
+                <a class="nav-link" href="Usuarios.aspx">Usuarios</a>
               </li>
             </ul>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
