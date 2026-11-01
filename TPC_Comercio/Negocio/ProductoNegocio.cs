@@ -31,9 +31,9 @@ namespace Negocio
                     p.Descripcion = (string)datos.Lector["Descripcion"];
                     p.Costo = (decimal)datos.Lector["Costo"];
                     p.PrecioVenta = (decimal)datos.Lector["PrecioVenta"];
-                    p.Marca = (int)datos.Lector["Marca"];
-                    p.Categoria = (int)datos.Lector["Categoria"];
-                    p.Proveedor = (int)datos.Lector["Proveedor"];
+                    //p.Marca = (int)datos.Lector["Marca"];
+                    //p.Categoria = (int)datos.Lector["Categoria"];
+                    //p.Proveedor = (int)datos.Lector["Proveedor"];
                     p.StockActual = (int)datos.Lector["StockActual"];
                     p.StockMinimo = (int)datos.Lector["StockMinimo"];
                     p.PorcentajeGanancia = (decimal)datos.Lector["PorcentajeGanancia"];
