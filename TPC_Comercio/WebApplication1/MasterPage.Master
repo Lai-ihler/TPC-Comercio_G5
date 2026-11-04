@@ -36,6 +36,10 @@
                             <li class="nav-item"><a class="nav-link" href="Categorias.aspx">Categorías</a></li>
 
                             <li class="nav-item"><a class="nav-link" href="Usuarios.aspx">Usuarios</a></li>
+                            
+                            <li class="nav-item"><a class="nav-link" href="Proveedores.aspx">Proveedores</a></li>
+                            
+                            <li class="nav-item"><a class="nav-link" href="Compras.aspx">Compras</a></li>
                         </ul>
                     </div>
                 </div>

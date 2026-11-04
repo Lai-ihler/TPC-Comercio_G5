@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-<<<<<<< HEAD
-=======
 using System.Runtime.InteropServices.ComTypes;
->>>>>>> 3a95726 (gv Proveedores y Formulario Proveedores)
 using System.Text;
 using System.Threading.Tasks;
 
