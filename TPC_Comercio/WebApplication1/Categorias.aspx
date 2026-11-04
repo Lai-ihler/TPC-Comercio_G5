@@ -6,11 +6,11 @@
     <p>Listado de categorías.</p>
 
     <p>
-        <asp:HyperLink ID="lnkNuevo" runat="server"
+        <asp:HyperLink ID="lnkNuevo" runat="server" CssClass="btn btn-primary mb-3"
             NavigateUrl="FormularioCategoria.aspx">Nueva categoría</asp:HyperLink>
     </p>
 
-    <asp:GridView ID="gvCategorias" runat="server"
+    <asp:GridView ID="gvCategorias" runat="server" CssClass="table"
         AutoGenerateColumns="False"
         EmptyDataText="No hay categorías para mostrar.">
         <Columns>

@@ -10,6 +10,7 @@
         <asp:GridView
             ID="gvProveedores"
             runat="server"
+            CssClass="table"
             AutoGenerateColumns="False"
             EmptyDataText="No hay proveedores para mostrar.">
 
@@ -24,7 +25,8 @@
         </asp:GridView>
         <p>
             <asp:HyperLink ID="lnkNuevo" runat="server"
-                NavigateUrl="FormularioProveedor.aspx">
+                NavigateUrl="FormularioProveedor.aspx"
+                CssClass="btn btn-primary">
                 Nuevo Proveedor
             </asp:HyperLink>
         </p>

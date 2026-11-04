@@ -9,6 +9,7 @@
         <asp:GridView
             ID="gvClientes"
             runat="server"
+            CssClass="table"
             AutoGenerateColumns="False"
             EmptyDataText="No hay clientes para mostrar.">
     

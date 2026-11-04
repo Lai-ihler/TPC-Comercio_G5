@@ -2,17 +2,19 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
     <h1>Marcas</h1>
     <p>Listado de marcas.</p>
 
     <p>
-        <asp:HyperLink ID="lnkNuevo" runat="server"
+        <asp:HyperLink ID="lnkNuevo" runat="server" CssClass="btn btn-primary mb-3"
             NavigateUrl="FormularioMarca.aspx">Nueva marca</asp:HyperLink>
     </p>
 
-    <asp:GridView ID="gvMarcas" runat="server"
+    <asp:GridView ID="gvMarcas" runat="server" CssClass="table"
         AutoGenerateColumns="False"
         EmptyDataText="No hay marcas para mostrar.">
+
         <Columns>
             <asp:BoundField DataField="Id" HeaderText="ID" />
             <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />

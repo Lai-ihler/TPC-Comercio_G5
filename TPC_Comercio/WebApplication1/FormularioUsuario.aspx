@@ -1,55 +1,63 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="FormularioUsuario.aspx.cs" Inherits="WebApplication1.FormularioUsuario" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Formulario Usuario</h1>
     <p>Completa los datos del usuario.</p>
-    
-    <p>
-        <asp:Label ID="lblNombreUsuario" runat="server"
-            AssociatedControlID="lblNombreUsuario" Text="Nombre de Usuario" />
-        <br />
-        <asp:TextBox ID="txtNombreUsuario" runat="server" />
-    </p>
 
-    <p>
-        <asp:Label ID="lblPass" runat="server"
-            AssociatedControlID="lblPass" Text="Contraseña" />
-        <br />
-        <asp:TextBox ID="txtPass" runat="server" />
-    </p>
+    <div class="row">
 
-    <p>
-        <asp:Label ID="lblNombre" runat="server"
-            AssociatedControlID="lblNombre" Text="Nombre" />
-        <br />
-        <asp:TextBox ID="txtNombre" runat="server" />
-    </p>
+        <div class="col-6">
+            <div class="mb-3">
 
-    <p>
-     <asp:Label ID="lblApellido" runat="server"
-            AssociatedControlID="lblApellido" Text="Apellido" />
-        <br />
-        <asp:TextBox ID="txtApellido" runat="server" />
-    </p>
+                <asp:Label ID="lblNombreUsuario" runat="server" CssClass=" form-label"
+                    AssociatedControlID="lblNombreUsuario" Text="Nombre de Usuario" />
 
-    <p>
-    <asp:Label ID="lblEmail" runat="server"
-          AssociatedControlID="lblEmail" Text="Email" />
-         <br />
-        <asp:TextBox ID="txtEmail" runat="server" />
-    </p>
+                <asp:TextBox ID="txtNombreUsuario" runat="server" CssClass="form-control" />
+            </div>
 
-    <p>
-    <asp:Label ID="lblPerfil" runat="server"
-         AssociatedControlID="lblPerfil" Text="Perfil" />
-         <br />
-    <asp:TextBox ID="txtPerfil" runat="server" />
-    </p>
-    
-    <p>
-        <asp:Button ID="btnGuardar" runat="server" Text="Guardar" />
-        <asp:HyperLink ID="lnkCancelar" runat="server"
-            NavigateUrl="Marcas.aspx">Cancelar</asp:HyperLink>
-    </p>
+            <div class="mb-3">
+                <asp:Label ID="lblPass" runat="server" CssClass="form-label"
+                    AssociatedControlID="lblPass" Text="Contraseña" />
+
+                <asp:TextBox ID="txtPass" runat="server" CssClass="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <asp:Label ID="lblNombre" runat="server" CssClass="form-label"
+                    AssociatedControlID="lblNombre" Text="Nombre" />
+
+                <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <asp:Label ID="lblApellido" runat="server" CssClass="form-label"
+                    AssociatedControlID="lblApellido" Text="Apellido" />
+
+                <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <asp:Label ID="lblEmail" runat="server" CssClass="form-label"
+                    AssociatedControlID="lblEmail" Text="Email" />
+
+                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <asp:Label ID="lblPerfil" runat="server"
+                    AssociatedControlID="lblPerfil" Text="Perfil" CssClass="form-label" />
+
+                <asp:TextBox ID="txtPerfil" runat="server" CssClass="form-control" />
+            </div>
+
+            <p>
+                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary" />
+                <asp:HyperLink ID="lnkCancelar" runat="server"
+                    NavigateUrl="Marcas.aspx">Cancelar</asp:HyperLink>
+            </p>
+
+        </div>
+    </div>
 </asp:Content>

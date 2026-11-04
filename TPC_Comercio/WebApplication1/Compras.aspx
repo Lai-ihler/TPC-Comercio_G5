@@ -10,6 +10,7 @@
         <asp:GridView
             ID="gvCompras"
             runat="server"
+             CssClass="table"
             AutoGenerateColumns="False"
             EmptyDataText="No hay compras para mostrar.">
 
@@ -32,6 +33,7 @@
         </asp:GridView>
         <p>
             <asp:HyperLink ID="lnkNuevo" runat="server"
+                 CssClass="btn btn-primary"
                 NavigateUrl="Compras.aspx">
             Nueva Compra
             </asp:HyperLink>

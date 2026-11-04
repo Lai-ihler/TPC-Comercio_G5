@@ -9,6 +9,7 @@
         <asp:GridView
             ID="gvUsuarios"
             runat="server"
+             CssClass="table"
             AutoGenerateColumns="False"
             EmptyDataText="No hay usuarios para mostrar.">
     
@@ -25,7 +26,9 @@
         </asp:GridView>
         <p>
             <asp:HyperLink ID="lnkNuevo" runat="server"
-            NavigateUrl="FormularioUsuario.aspx">Nuevo Usuario
+                NavigateUrl="FormularioUsuario.aspx"
+                CssClass="btn btn-primary">
+                Nuevo Usuario
             </asp:HyperLink>
         </p>
     </div>

@@ -6,11 +6,11 @@
     <p>Listado de productos del comercio.</p>
 
     <p>
-        <asp:HyperLink ID="lnkNuevo" runat="server"
+        <asp:HyperLink ID="lnkNuevo" runat="server" CssClass="btn btn-primary mb-3"
             NavigateUrl="FormularioProducto.aspx">Nuevo producto</asp:HyperLink>
     </p>
 
-    <asp:GridView ID="gvListado" runat="server"
+    <asp:GridView ID="gvListado" runat="server" CssClass="table"
         AutoGenerateColumns="False"
         EmptyDataText="No hay productos para mostrar.">
         <Columns>

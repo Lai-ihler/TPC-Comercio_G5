@@ -1,48 +1,55 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="FormularioProveedor.aspx.cs" Inherits="WebApplication1.FormularioProveedor" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Formulario Proveedor</h1>
     <p>Completa los datos del proveedor.</p>
 
-    <p>
-        <asp:Label ID="lblRazonSocial" runat="server"
-            AssociatedControlID="lblRazonSocial" Text="Razon Social" />
-        <br />
-        <asp:TextBox ID="txtRazonSocial" runat="server" />
-    </p>
+    <div class="row">
+        <div class="col-6">
+            <div class="mb-3">
+                <asp:Label ID="lblRazonSocial" runat="server" CssClass="form-label"
+                    AssociatedControlID="lblRazonSocial" Text="Razon Social" />
 
-    <p>
-        <asp:Label ID="lblCuit" runat="server"
-            AssociatedControlID="lblCuit" Text="Cuit" />
-        <br />
-        <asp:TextBox ID="txtCuit" runat="server" />
-    </p>
+                <asp:TextBox ID="txtRazonSocial" runat="server" CssClass="form-control" />
 
-    <p>
-        <asp:Label ID="lblEmail" runat="server"
-            AssociatedControlID="lblEmail" Text="Email" />
-        <br />
-        <asp:TextBox ID="txtEmail" runat="server" />
-    </p>
+            </div>
+            <div class="mb-3">
+                <asp:Label ID="lblCuit" runat="server" CssClass="form-label"
+                    AssociatedControlID="lblCuit" Text="Cuit" />
 
-    <p>
-        <asp:Label ID="lblTelefono" runat="server"
-            AssociatedControlID="lblTelefono" Text="Telefono" />
-        <br />
-        <asp:TextBox ID="txtPerfil" runat="server" />
-    </p>
+                <asp:TextBox ID="txtCuit" runat="server" CssClass="form-control" />
+            </div>
 
-    <p>
-        <asp:Label ID="lblDireccion" runat="server"
-        AssociatedControlID="lblDireccion" Text="Direccion" />
-        <br />
-        <asp:TextBox ID="txtDireccion" runat="server" />
-    </p>
 
-    <p>
-        <asp:Button ID="btnGuardar" runat="server" Text="Guardar" />
-        <asp:HyperLink ID="lnkCancelar" runat="server"
-            NavigateUrl="Proveedores.aspx">Cancelar</asp:HyperLink>
-    </p>
+            <div class="mb-3">
+                <asp:Label ID="lblEmail" runat="server" CssClass="form-label"
+                    AssociatedControlID="lblEmail" Text="Email" />
+
+                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <asp:Label ID="lblTelefono" runat="server" CssClass="form-label"
+                    AssociatedControlID="lblTelefono" Text="Telefono" />
+
+                <asp:TextBox ID="txtPerfil" runat="server" CssClass="form-control" />
+            </div>
+
+            <div class="mb-3">
+                <asp:Label ID="lblDireccion" runat="server" CssClass="form-label"
+                    AssociatedControlID="lblDireccion" Text="Direccion" />
+
+                <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control" />
+            </div>
+
+            <p>
+                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary" />
+                <asp:HyperLink ID="lnkCancelar" runat="server"
+                    NavigateUrl="Proveedores.aspx">Cancelar</asp:HyperLink>
+            </p>
+
+        </div>
+    </div>
 </asp:Content>

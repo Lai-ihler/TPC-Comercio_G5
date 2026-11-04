@@ -1,93 +1,100 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="FormularioProducto.aspx.cs" Inherits="WebApplication1.FormularioProducto" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Formulario de producto</h1>
     <p>Completa los datos del producto.</p>
 
-    <fieldset>
-        <legend>Datos del producto</legend>
+    <div class="row">
 
-        <p>
-            <asp:Label ID="lblCodigo" runat="server"
-                AssociatedControlID="txtCodigo" Text="Codigo" />
-            <br />
-            <asp:TextBox ID="txtCodigo" runat="server" />
-        </p>
+        <div class="col-6">
 
-        <p>
-            <asp:Label ID="lblNombre" runat="server"
-                AssociatedControlID="txtNombre" Text="Nombre" />
-            <br />
-            <asp:TextBox ID="txtNombre" runat="server" />
-        </p>
+            <fieldset>
+                <legend>Datos del producto</legend>
 
-        <p>
-            <asp:Label ID="lblDescripcion" runat="server"
-                AssociatedControlID="txtDescripcion" Text="Descripcion" />
-            <br />
-            <asp:TextBox ID="txtDescripcion" runat="server"
-                TextMode="MultiLine" Rows="3" Columns="40" />
-        </p>
-    </fieldset>
+                <div class="mb-3">
+                    <asp:Label ID="lblCodigo" runat="server" CssClass="form-label"
+                        AssociatedControlID="txtCodigo" Text="Codigo" />
 
-    <fieldset>
-        <legend>Clasificacion</legend>
+                    <asp:TextBox ID="txtCodigo" runat="server" CssClass="form-control" />
+                </div>
 
-        <p>
-            <asp:Label ID="lblMarca" runat="server"
-                AssociatedControlID="ddlMarca" Text="Marca" />
-            <br />
-            <asp:DropDownList ID="ddlMarca" runat="server">
-                <asp:ListItem Text="Selecciona una marca" Value="" />
-            </asp:DropDownList>
-        </p>
+                <div class="mb-3">
+                    <asp:Label ID="lblNombre" runat="server" CssClass="form-label"
+                        AssociatedControlID="txtNombre" Text="Nombre" />
 
-        <p>
-            <asp:Label ID="lblCategoria" runat="server"
-                AssociatedControlID="ddlCategoria" Text="Categoria" />
-            <br />
-            <asp:DropDownList ID="ddlCategoria" runat="server">
-                <asp:ListItem Text="Selecciona una categoria" Value="" />
-            </asp:DropDownList>
-        </p>
+                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" />
+                </div>
 
-        <p>
-            <asp:Label ID="lblProveedores" runat="server" Text="Proveedores" />
-            <br />
-            <asp:CheckBoxList ID="cblProveedores" runat="server" />
-        </p>
-    </fieldset>
+                <div class="mb-3">
+                    <asp:Label ID="lblDescripcion" runat="server" CssClass="form-label"
+                        AssociatedControlID="txtDescripcion" Text="Descripcion" />
 
-    <fieldset>
-        <legend>Stock e imagen</legend>
+                    <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control"
+                        TextMode="MultiLine" Rows="3" Columns="40" />
+                </div>
+            </fieldset>
 
-        <p>
-            <asp:Label ID="lblStockMinimo" runat="server"
-                AssociatedControlID="txtStockMinimo" Text="Stock minimo" />
-            <br />
-            <asp:TextBox ID="txtStockMinimo" runat="server" />
-        </p>
+            <fieldset>
+                <legend>Clasificacion</legend>
 
-        <p>
-            <asp:Label ID="lblPorcentajeGanancia" runat="server"
-                AssociatedControlID="txtPorcentajeGanancia"
-                Text="Porcentaje de ganancia" />
-            <br />
-            <asp:TextBox ID="txtPorcentajeGanancia" runat="server" />
-        </p>
+                <div class="mb-3">
+                    <asp:Label ID="lblMarca" runat="server" CssClass="form-label"
+                        AssociatedControlID="ddlMarca" Text="Marca" />
 
-        <p>
-            <asp:Label ID="lblImagenUrl" runat="server"
-                AssociatedControlID="txtImagenUrl" Text="Imagen URL" />
-            <br />
-            <asp:TextBox ID="txtImagenUrl" runat="server" />
-        </p>
-    </fieldset>
+                    <asp:DropDownList ID="ddlMarca" runat="server" CssClass="form-select">
+                        <asp:ListItem Text="Selecciona una marca" Value="" />
+                    </asp:DropDownList>
+                </div>
 
-    <p>
-        <asp:Button ID="btnGuardar" runat="server" Text="Guardar" />
-        <asp:HyperLink ID="lnkCancelar" runat="server"
-            NavigateUrl="Productos.aspx">Cancelar</asp:HyperLink>
-    </p>
+                <div class="mb-3">
+                    <asp:Label ID="lblCategoria" runat="server" CssClass="form-label"
+                        AssociatedControlID="ddlCategoria" Text="Categoria" />
+
+                    <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-select">
+                        <asp:ListItem Text="Selecciona una categoria" Value="" />
+                    </asp:DropDownList>
+                </div>
+
+                <div class="mb-3">
+                    <asp:Label ID="lblProveedores" runat="server" CssClass="form-label" Text="Proveedores" />
+
+                    <asp:CheckBoxList ID="cblProveedores" runat="server" />
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Stock e imagen</legend>
+
+                <div class="mb-3">
+                    <asp:Label ID="lblStockMinimo" runat="server" CssClass="form-label"
+                        AssociatedControlID="txtStockMinimo" Text="Stock minimo" />
+
+                    <asp:TextBox ID="txtStockMinimo" runat="server" CssClass="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <asp:Label ID="lblPorcentajeGanancia" runat="server" CssClass="form-label"
+                        AssociatedControlID="txtPorcentajeGanancia"
+                        Text="Porcentaje de ganancia" />
+
+                    <asp:TextBox ID="txtPorcentajeGanancia" runat="server" CssClass="form-control" />
+                </div>
+
+                <div class="mb-3">
+                    <asp:Label ID="lblImagenUrl" runat="server" CssClass="form-label"
+                        AssociatedControlID="txtImagenUrl" Text="Imagen URL" />
+
+                    <asp:TextBox ID="txtImagenUrl" runat="server" CssClass="form-control" />
+                </div>
+            </fieldset>
+
+            <div class="mb-3">
+                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary" />
+                <asp:HyperLink ID="lnkCancelar" runat="server"
+                    NavigateUrl="Productos.aspx">Cancelar</asp:HyperLink>
+            </div>
+        </div>
+    </div>
 </asp:Content>
