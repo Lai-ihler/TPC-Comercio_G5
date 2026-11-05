@@ -9,7 +9,7 @@ namespace Negocio
 {
     public class ProductoNegocio
     {
-        private const string SELECT_BASE = "SELECT * FROM PRODUCTO";
+        private const string SELECT_BASE = "SELECT P.*, M.Descripcion AS MarcaDescripcion, C.Descripcion AS CategoriaDescripcion, PR.RazonSocial AS ProveedorRazonSocial FROM PRODUCTO P INNER JOIN MARCA M ON M.ID = P.Marca INNER JOIN CATEGORIA C ON C.ID = P.Categoria INNER JOIN PROVEEDOR PR ON PR.ID = P.Proveedor";
 
         public List<Producto> listar()
         {
@@ -31,9 +31,19 @@ namespace Negocio
                     p.Descripcion = (string)datos.Lector["Descripcion"];
                     p.Costo = (decimal)datos.Lector["Costo"];
                     p.PrecioVenta = (decimal)datos.Lector["PrecioVenta"];
-                    //p.Marca = (int)datos.Lector["Marca"];
-                    //p.Categoria = (int)datos.Lector["Categoria"];
-                    //p.Proveedor = (int)datos.Lector["Proveedor"];
+
+                    p.Marca = new Marca();
+                    p.Marca.Id = (int)datos.Lector["Marca"];
+                    p.Marca.Descripcion = (string)datos.Lector["MarcaDescripcion"];
+
+                    p.Categoria = new Categoria();
+                    p.Categoria.Id = (int)datos.Lector["Categoria"];
+                    p.Categoria.Descripcion = (string)datos.Lector["CategoriaDescripcion"];
+
+                    p.Proveedor = new Proveedor();
+                    p.Proveedor.Id = (int)datos.Lector["Proveedor"];
+                    p.Proveedor.RazonSocial = (string)datos.Lector["ProveedorRazonSocial"];
+
                     p.StockActual = (int)datos.Lector["StockActual"];
                     p.StockMinimo = (int)datos.Lector["StockMinimo"];
                     p.PorcentajeGanancia = (decimal)datos.Lector["PorcentajeGanancia"];

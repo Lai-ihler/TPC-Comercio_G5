@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Productos.aspx.cs" Inherits="WebApplication1.Productos" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -17,8 +18,9 @@
             <asp:BoundField DataField="Id" HeaderText="ID" />
             <asp:BoundField DataField="Codigo" HeaderText="Código" />
             <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-            <asp:BoundField DataField="Marca" HeaderText="ID Marca" />
-            <asp:BoundField DataField="Categoria" HeaderText="ID Categoría" />
+             <asp:BoundField DataField="Marca.Descripcion" HeaderText="Marca" />
+            <asp:BoundField DataField="Categoria.Descripcion" HeaderText="Categoria" />
+            <asp:BoundField DataField="Proveedor.RazonSocial" HeaderText="Proveedor" />
             <asp:BoundField DataField="StockActual" HeaderText="Stock actual" />
             <asp:BoundField DataField="Activo" HeaderText="Activo" />
         </Columns>
