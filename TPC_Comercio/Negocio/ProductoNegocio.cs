@@ -59,6 +59,53 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
+     
+        }
+
+        public void agregar(Producto nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("INSERT INTO PRODUCTO (Codigo, Nombre, Descripcion, Costo, PrecioVenta, Marca, Categoria, Proveedor, StockActual, StockMinimo, PorcentajeGanancia, ImagenUrl, Activo) VALUES (@Codigo, @Nombre, @Descripcion, @Costo, @PrecioVenta, @Marca, @Categoria, @Proveedor, @StockActual, @StockMinimo, @PorcentajeGanancia, @ImagenUrl, @Activo)");
+
+                datos.setearParametro("@Codigo", nuevo.Codigo);
+                datos.setearParametro("@Nombre", nuevo.Nombre);
+                datos.setearParametro("@Descripcion", nuevo.Descripcion);
+                datos.setearParametro("@Costo", nuevo.Costo);
+                datos.setearParametro("@PrecioVenta", nuevo.PrecioVenta);
+                datos.setearParametro("@Marca", nuevo.Marca.Id);
+                datos.setearParametro("@Categoria", nuevo.Categoria.Id);
+                datos.setearParametro("@Proveedor", nuevo.Proveedor.Id);
+                datos.setearParametro("@StockActual", nuevo.StockActual);
+                datos.setearParametro("@StockMinimo", nuevo.StockMinimo);
+                datos.setearParametro("@PorcentajeGanancia", nuevo.PorcentajeGanancia);
+                datos.setearParametro("@ImagenUrl", nuevo.ImagenUrl);
+                datos.setearParametro("@Activo", nuevo.Activo);
+
+                datos.ejecutarAccion();
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminarLogico(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("UPDATE PRODUCTO SET Activo = 0 WHERE ID = @Id");
+                datos.setearParametro("@Id", id);
+                datos.ejecutarAccion();
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
     }
 }

@@ -5,6 +5,14 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div>
         <h1>Compras</h1>
+        <p>
+            <asp:HyperLink ID="lnkNuevo" runat="server"
+                CssClass="btn btn-primary"
+                NavigateUrl="FormularioCompra.aspx">
+            Nueva Compra
+        </asp:HyperLink>
+        </p>
+        
         <p>Listado de compras del comercio</p>
 
         <asp:GridView
@@ -31,12 +39,6 @@
             </Columns>
 
         </asp:GridView>
-        <p>
-            <asp:HyperLink ID="lnkNuevo" runat="server"
-                 CssClass="btn btn-primary"
-                NavigateUrl="Compras.aspx">
-            Nueva Compra
-            </asp:HyperLink>
-        </p>
+        
     </div>
 </asp:Content>

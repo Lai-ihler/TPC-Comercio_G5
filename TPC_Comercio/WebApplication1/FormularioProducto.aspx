@@ -111,7 +111,7 @@
             </fieldset>
 
             <div class="mb-3">
-                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary" />
+                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary" onclick="btnGuardar_Click" />
                 <asp:HyperLink ID="lnkCancelar" runat="server"
                     NavigateUrl="Productos.aspx">Cancelar</asp:HyperLink>
             </div>

@@ -4,12 +4,13 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1>Productos</h1>
-    <p>Listado de productos del comercio.</p>
 
     <p>
         <asp:HyperLink ID="lnkNuevo" runat="server" CssClass="btn btn-primary mb-3"
             NavigateUrl="FormularioProducto.aspx">Nuevo producto</asp:HyperLink>
     </p>
+
+    <p>Listado de productos del comercio.</p>
 
     <asp:GridView ID="gvListado" runat="server" CssClass="table"
         AutoGenerateColumns="False"
