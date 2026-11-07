@@ -17,7 +17,7 @@
 
             </div>
             <p>
-                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary" />
+                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary"  OnClick="btnGuardar_Click"/>
                 <asp:HyperLink ID="lnkCancelar" runat="server" 
                     NavigateUrl="Marcas.aspx">Cancelar</asp:HyperLink>
             </p>

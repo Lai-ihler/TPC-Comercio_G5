@@ -12,13 +12,16 @@
     </p>
 
     <asp:GridView ID="gvMarcas" runat="server" CssClass="table"
-        AutoGenerateColumns="False"
+        AutoGenerateColumns="False" DataKeyNames="Id"
+        OnSelectedIndexChanged="gvMarcas_SelectedIndexChanged"
+
         EmptyDataText="No hay marcas para mostrar.">
 
         <Columns>
             <asp:BoundField DataField="Id" HeaderText="ID" />
             <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />
             <asp:BoundField DataField="Activo" HeaderText="Activo" />
+            <asp:CommandField HeaderText="Editar" ShowSelectButton="true" SelectText="✍" />
         </Columns>
     </asp:GridView>
 </asp:Content>

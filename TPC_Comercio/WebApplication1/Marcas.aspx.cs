@@ -13,11 +13,17 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                            {
+            {
                 MarcaNegocio negocio = new MarcaNegocio();
-               gvMarcas.DataSource = negocio.listar();
+                gvMarcas.DataSource = negocio.listar();
                 gvMarcas.DataBind();
-                            }
+            }
+        }
+
+        protected void gvMarcas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string id = gvMarcas.SelectedDataKey.Value.ToString();
+            Response.Redirect("FormularioMarca.aspx?id=" + id);
         }
     }
 }
