@@ -77,11 +77,13 @@
     <Content Include="FormularioProducto.aspx" />
     <Content Include="FormularioProveedor.aspx" />
     <Content Include="FormularioUsuario.aspx" />
+    <Content Include="FormularioVenta.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Marcas.aspx" />
     <Content Include="Productos.aspx" />
     <Content Include="Proveedores.aspx" />
     <Content Include="Usuarios.aspx" />
+    <Content Include="Ventas.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +157,13 @@
     <Compile Include="FormularioUsuario.aspx.designer.cs">
       <DependentUpon>FormularioUsuario.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FormularioVenta.aspx.cs">
+      <DependentUpon>FormularioVenta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormularioVenta.aspx.designer.cs">
+      <DependentUpon>FormularioVenta.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -193,6 +202,13 @@
     </Compile>
     <Compile Include="Usuarios.aspx.designer.cs">
       <DependentUpon>Usuarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ventas.aspx.cs">
+      <DependentUpon>Ventas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ventas.aspx.designer.cs">
+      <DependentUpon>Ventas.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
