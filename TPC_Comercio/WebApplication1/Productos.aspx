@@ -14,6 +14,8 @@
 
     <asp:GridView ID="gvListado" runat="server" CssClass="table"
         AutoGenerateColumns="False"
+        DataKeyNames="Id"
+        OnSelectedIndexChanged="gvListado_SelectedIndexChanged"
         EmptyDataText="No hay productos para mostrar.">
         <Columns>
             <asp:BoundField DataField="Id" HeaderText="ID" />
@@ -24,6 +26,8 @@
             <asp:BoundField DataField="Proveedor.RazonSocial" HeaderText="Proveedor" />
             <asp:BoundField DataField="StockActual" HeaderText="Stock actual" />
             <asp:BoundField DataField="Activo" HeaderText="Activo" />
+            <asp:CommandField HeaderText="Accion"
+                ShowSelectButton="True" SelectText="Modificar" />
         </Columns>
     </asp:GridView>
 </asp:Content>

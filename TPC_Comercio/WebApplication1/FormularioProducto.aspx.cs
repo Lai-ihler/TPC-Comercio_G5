@@ -35,6 +35,34 @@ namespace WebApplication1
                 ddlProveedor.DataValueField = "Id";
                 ddlProveedor.DataBind();
                 ddlProveedor.Items.Insert(0, new ListItem("Selecciona un proveedor", ""));
+
+                string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
+
+                if (id != "")
+                {
+                    ProductoNegocio negocio = new ProductoNegocio();
+                    Producto seleccionado = negocio.listar(id)[0];
+
+                    Session.Add("productoSeleccionado", seleccionado);
+
+                    txtCodigo.Text = seleccionado.Codigo;
+                    txtNombre.Text = seleccionado.Nombre;
+                    txtDescripcion.Text = seleccionado.Descripcion;
+                    txtCosto.Text = seleccionado.Costo.ToString();
+                    txtPrecioVenta.Text = seleccionado.PrecioVenta.ToString();
+
+                    ddlMarca.SelectedValue = seleccionado.Marca.Id.ToString();
+                    ddlCategoria.SelectedValue = seleccionado.Categoria.Id.ToString();
+                    ddlProveedor.SelectedValue = seleccionado.Proveedor.Id.ToString();
+
+                    txtStockActual.Text = seleccionado.StockActual.ToString();
+                    txtStockMinimo.Text = seleccionado.StockMinimo.ToString();
+                    txtPorcentajeGanancia.Text = seleccionado.PorcentajeGanancia.ToString();
+                    txtImagenUrl.Text = seleccionado.ImagenUrl;
+
+                    if (!seleccionado.Activo)
+                        btnInactivar.Text = "Reactivar";
+                }
             }
         }
 
@@ -64,9 +92,37 @@ namespace WebApplication1
             nuevo.Activo = true;
 
             ProductoNegocio negocio = new ProductoNegocio();
-            negocio.agregar(nuevo);
+            if (Request.QueryString["id"] != null)
+            {
+                nuevo.Id = int.Parse(Request.QueryString["id"]);
+                negocio.modificar(nuevo);
+            }
+            else
+            {
+                negocio.agregar(nuevo);
+            }
 
             Response.Redirect("Productos.aspx", false);
+        }
+
+        protected void btnInactivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ProductoNegocio negocio = new ProductoNegocio();
+                Producto productoSeleccionado = (Producto)Session["productoSeleccionado"];
+                if (productoSeleccionado != null)
+                {
+                    negocio.eliminarLogico(productoSeleccionado.Id,!productoSeleccionado.Activo);
+                    Response.Redirect("Productos.aspx", false);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                //Response.Redirect("Error.aspx");
+            }
         }
     }
 }

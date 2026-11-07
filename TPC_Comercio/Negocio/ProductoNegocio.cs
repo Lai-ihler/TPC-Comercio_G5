@@ -11,14 +11,22 @@ namespace Negocio
     {
         private const string SELECT_BASE = "SELECT P.*, M.Descripcion AS MarcaDescripcion, C.Descripcion AS CategoriaDescripcion, PR.RazonSocial AS ProveedorRazonSocial FROM PRODUCTO P INNER JOIN MARCA M ON M.ID = P.Marca INNER JOIN CATEGORIA C ON C.ID = P.Categoria INNER JOIN PROVEEDOR PR ON PR.ID = P.Proveedor";
 
-        public List<Producto> listar()
+        public List<Producto> listar(string id = "")
         {
             List<Producto> lista = new List<Producto>();
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setearConsulta(SELECT_BASE);
+                string consulta = SELECT_BASE;
+
+                if (id != "")
+                {
+                    consulta += " WHERE P.ID = @id";
+                    datos.setearParametro("@id", int.Parse(id));
+                }
+
+                datos.setearConsulta(consulta);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -92,13 +100,44 @@ namespace Negocio
             }
         }
 
-        public void eliminarLogico(int id)
+        public void modificar(Producto producto)
         {
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
-                datos.setearConsulta("UPDATE PRODUCTO SET Activo = 0 WHERE ID = @Id");
+                datos.setearConsulta("UPDATE PRODUCTO SET Codigo = @Codigo, Nombre = @Nombre, Descripcion = @Descripcion, Costo = @Costo, PrecioVenta = @PrecioVenta, Marca = @Marca, Categoria = @Categoria, Proveedor = @Proveedor, StockActual = @StockActual, StockMinimo = @StockMinimo, PorcentajeGanancia = @PorcentajeGanancia, ImagenUrl = @ImagenUrl WHERE ID = @Id");
+
+                datos.setearParametro("@Codigo", producto.Codigo);
+                datos.setearParametro("@Nombre", producto.Nombre);
+                datos.setearParametro("@Descripcion", producto.Descripcion);
+                datos.setearParametro("@Costo", producto.Costo);
+                datos.setearParametro("@PrecioVenta", producto.PrecioVenta);
+                datos.setearParametro("@Marca", producto.Marca.Id);
+                datos.setearParametro("@Categoria", producto.Categoria.Id);
+                datos.setearParametro("@Proveedor", producto.Proveedor.Id);
+                datos.setearParametro("@StockActual", producto.StockActual);
+                datos.setearParametro("@StockMinimo", producto.StockMinimo);
+                datos.setearParametro("@PorcentajeGanancia", producto.PorcentajeGanancia);
+                datos.setearParametro("@ImagenUrl", producto.ImagenUrl);
+                datos.setearParametro("@Id", producto.Id);
+
+                datos.ejecutarAccion();
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminarLogico(int id,bool activo=false)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("UPDATE PRODUCTO SET Activo = @Activo WHERE ID = @Id");
+                datos.setearParametro("@Activo", activo);
                 datos.setearParametro("@Id", id);
                 datos.ejecutarAccion();
             }

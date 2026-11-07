@@ -19,5 +19,11 @@ namespace WebApplication1
                 gvListado.DataBind();
             }
         }
+
+        protected void gvListado_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string id = gvListado.SelectedDataKey.Value.ToString();
+            Response.Redirect("FormularioProducto.aspx?id=" + id);
+        }
     }
 }
