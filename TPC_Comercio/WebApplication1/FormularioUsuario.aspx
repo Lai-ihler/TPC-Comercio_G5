@@ -44,18 +44,22 @@
 
                 <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" />
             </div>
-
+            
             <div class="mb-3">
-                <asp:Label ID="lblPerfil" runat="server"
-                    AssociatedControlID="lblPerfil" Text="Perfil" CssClass="form-label" />
+                <asp:Label ID="lblPerfil" runat="server" CssClass="form-label"
+                    AssociatedControlID="ddlPerfil" Text="Perfil" />
 
-                <asp:TextBox ID="txtPerfil" runat="server" CssClass="form-control" />
+                <asp:DropDownList ID="ddlPerfil" runat="server" CssClass="form-select">
+
+                </asp:DropDownList>
+
             </div>
 
             <p>
-                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary" />
+                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary" onclick="btnGuardar_Click"/>
+                <asp:Button ID="btnInactivar" runat="server" Text="Inactivar" CssClass="btn btn-warning" onclick="btnInactivar_Click"/>
                 <asp:HyperLink ID="lnkCancelar" runat="server"
-                    NavigateUrl="Marcas.aspx">Cancelar</asp:HyperLink>
+                    NavigateUrl="Usuarios.aspx">Cancelar</asp:HyperLink>
             </p>
 
         </div>

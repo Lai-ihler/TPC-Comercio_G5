@@ -20,5 +20,23 @@ namespace WebApplication1
                 gvUsuarios.DataBind();
             }
         }
+        protected void gvUsuarios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string id = gvUsuarios.SelectedDataKey.Value.ToString();
+
+            Response.Redirect("FormularioUsuario.aspx?id=" + id);
+        }
+        protected void gvUsuarios_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                bool activo = Convert.ToBoolean(DataBinder.Eval(e.Row.DataItem, "Activo"));
+
+                if (!activo)
+                {
+                    e.Row.BackColor = System.Drawing.Color.LightGray;
+                }
+            }
+        }
     }
 }
