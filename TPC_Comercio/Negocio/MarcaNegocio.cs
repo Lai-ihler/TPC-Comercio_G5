@@ -80,5 +80,25 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public void eliminarLogico(int id, bool activo = false)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("UPDATE MARCA SET Activo = @activo WHERE ID = @id");
+                datos.setearParametro("@activo", activo);
+                datos.setearParametro("@id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
     }
 }

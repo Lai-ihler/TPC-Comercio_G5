@@ -16,11 +16,18 @@ namespace WebApplication1
             try
             {
                 string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
+
+                btnInactivar.Visible = id != "";
+
                 if (id != "" && !IsPostBack)
                 {
                     MarcaNegocio negocio = new MarcaNegocio();
                     Marca seleccionada = (negocio.listar(id))[0];
                     txtDescripcion.Text = seleccionada.Descripcion;
+
+                    Session.Add("marcaSeleccionada", seleccionada);
+                    if (!seleccionada.Activo)
+                        btnInactivar.Text = "Reactivar";
                 }
             }
             catch (Exception ex)
@@ -47,6 +54,22 @@ namespace WebApplication1
                 else
                     negocio.agregar(nueva);
 
+                Response.Redirect("Marcas.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                throw;
+            }
+        }
+        protected void btnInactivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MarcaNegocio negocio = new MarcaNegocio();
+                Marca seleccionada = (Marca)Session["marcaSeleccionada"];
+
+                negocio.eliminarLogico(seleccionada.Id, !seleccionada.Activo);
                 Response.Redirect("Marcas.aspx", false);
             }
             catch (Exception ex)
