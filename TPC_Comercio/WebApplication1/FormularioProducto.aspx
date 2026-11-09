@@ -38,12 +38,14 @@
                 <asp:Label ID="lblCosto" runat="server" CssClass="form-label"
                     AssociatedControlID="txtCosto" Text="Costo" />
                 <asp:TextBox ID="txtCosto" runat="server" CssClass="form-control" />
+                <asp:Label ID="lblErrorCosto" runat="server" CssClass="text-danger" />
                 </div>
 
                 <div class="mb-3">
                     <asp:Label ID="lblPrecioVenta" runat="server" CssClass="form-label"
                         AssociatedControlID="txtPrecioVenta" Text="Precio de venta" />
                     <asp:TextBox ID="txtPrecioVenta" runat="server" CssClass="form-control" />
+                    <asp:Label ID="lblErrorPrecioVenta" runat="server" CssClass="text-danger" />
                 </div>
 
             </fieldset>
@@ -54,6 +56,7 @@
                 <div class="mb-3">
                     <asp:Label ID="lblMarca" runat="server" CssClass="form-label"
                         AssociatedControlID="ddlMarca" Text="Marca" />
+                        <asp:Label ID="lblErrorMarca" runat="server" CssClass="text-danger" />
 
                     <asp:DropDownList ID="ddlMarca" runat="server" CssClass="form-select">
                         
@@ -67,6 +70,7 @@
                     <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-select">
                         
                     </asp:DropDownList>
+                    <asp:Label ID="lblErrorCategoria" runat="server" CssClass="text-danger" />
                 </div>
 
                 <div class="mb-3">
@@ -75,6 +79,7 @@
                     <asp:DropDownList ID="ddlProveedor" runat="server" CssClass="form-select">
                         
                    </asp:DropDownList>
+                    <asp:Label ID="lblErrorProveedor" runat="server" CssClass="text-danger" />
                 </div>
             </fieldset>
 
@@ -85,6 +90,7 @@
                     <asp:Label ID="lblStockActual" runat="server" CssClass="form-label"
                         AssociatedControlID="txtStockActual" Text="Stock actual" />
                     <asp:TextBox ID="txtStockActual" runat="server" CssClass="form-control" />
+                    <asp:Label ID="lblErrorStockActual" runat="server" CssClass="text-danger" />
                 </div>
 
                 <div class="mb-3">
@@ -92,6 +98,7 @@
                         AssociatedControlID="txtStockMinimo" Text="Stock minimo" />
 
                     <asp:TextBox ID="txtStockMinimo" runat="server" CssClass="form-control" />
+                    <asp:Label ID="lblErrorStockMinimo" runat="server" CssClass="text-danger" />
                 </div>
 
                 <div class="mb-3">

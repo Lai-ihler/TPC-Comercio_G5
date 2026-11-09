@@ -37,6 +37,7 @@ namespace WebApplication1
                 ddlProveedor.Items.Insert(0, new ListItem("Selecciona un proveedor", ""));
 
                 string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
+                btnInactivar.Visible = id != "";
 
                 if (id != "")
                 {
@@ -68,41 +69,102 @@ namespace WebApplication1
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            Producto nuevo = new Producto();
+            /// Validaciones que muestran mensajes de error si los campos no cumplen con los requisitos. Terminan en Producto nuevo = new Producto();
+            lblErrorCosto.Text = "";
+            lblErrorPrecioVenta.Text = "";
+            lblErrorMarca.Text = "";
+            lblErrorCategoria.Text = "";
+            lblErrorProveedor.Text = "";
+            lblErrorStockActual.Text = "";
+            lblErrorStockMinimo.Text = "";
 
-            nuevo.Codigo = txtCodigo.Text;
-            nuevo.Nombre = txtNombre.Text;
-            nuevo.Descripcion = txtDescripcion.Text;
-            nuevo.Costo = decimal.Parse(txtCosto.Text);
-            nuevo.PrecioVenta = decimal.Parse(txtPrecioVenta.Text);
-
-            nuevo.Marca = new Marca();
-            nuevo.Marca.Id = int.Parse(ddlMarca.SelectedValue);
-
-            nuevo.Categoria = new Categoria();
-            nuevo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
-
-            nuevo.Proveedor = new Proveedor();
-            nuevo.Proveedor.Id = int.Parse(ddlProveedor.SelectedValue);
-
-            nuevo.StockActual = int.Parse(txtStockActual.Text);
-            nuevo.StockMinimo = int.Parse(txtStockMinimo.Text);
-            nuevo.PorcentajeGanancia = decimal.Parse(txtPorcentajeGanancia.Text);
-            nuevo.ImagenUrl = txtImagenUrl.Text;
-            nuevo.Activo = true;
-
-            ProductoNegocio negocio = new ProductoNegocio();
-            if (Request.QueryString["id"] != null)
+            try
             {
-                nuevo.Id = int.Parse(Request.QueryString["id"]);
-                negocio.modificar(nuevo);
-            }
-            else
-            {
-                negocio.agregar(nuevo);
-            }
+                if(ddlMarca.SelectedValue == "")
+                {
+                    lblErrorMarca.Text = "Selecciona una marca.";
+                    return;
+                }
+                if (ddlCategoria.SelectedValue == "")
+                {
+                    lblErrorCategoria.Text = "Selecciona una categoria.";
+                    return;
+                }
+                if(ddlProveedor.SelectedValue == "")
+                {
+                    lblErrorProveedor.Text = "Selecciona un proveedor.";
+                    return;
+                }
 
-            Response.Redirect("Productos.aspx", false);
+                decimal costo = decimal.Parse(txtCosto.Text);
+                decimal precioVenta = decimal.Parse(txtPrecioVenta.Text);
+                int stockActual = int.Parse(txtStockActual.Text);
+                int stockMinimo = int.Parse(txtStockMinimo.Text);
+
+                if (costo <= 0)
+                {
+                    lblErrorCosto.Text = "El costo debe ser mayor a cero.";
+                    return;
+                }
+
+                if (precioVenta <= 0)
+                {
+                    lblErrorPrecioVenta.Text = "El precio de venta debe ser mayor a cero.";
+                    return;
+                }
+
+                if (stockActual < stockMinimo)
+                {
+                    lblErrorStockActual.Text = "El stock actual debe ser mayor o igual al stock mínimo.";
+                    return; 
+                }
+
+                if (stockMinimo <= 0)
+                {
+                    lblErrorStockMinimo.Text = "El stock minimo debe ser mayor a cero.";
+                    return;
+                }
+
+                Producto nuevo = new Producto();
+
+                nuevo.Codigo = txtCodigo.Text;
+                nuevo.Nombre = txtNombre.Text;
+                nuevo.Descripcion = txtDescripcion.Text;
+                nuevo.Costo = decimal.Parse(txtCosto.Text);
+                nuevo.PrecioVenta = decimal.Parse(txtPrecioVenta.Text);
+
+                nuevo.Marca = new Marca();
+                nuevo.Marca.Id = int.Parse(ddlMarca.SelectedValue);
+
+                nuevo.Categoria = new Categoria();
+                nuevo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
+
+                nuevo.Proveedor = new Proveedor();
+                nuevo.Proveedor.Id = int.Parse(ddlProveedor.SelectedValue);
+
+                nuevo.StockActual = int.Parse(txtStockActual.Text);
+                nuevo.StockMinimo = int.Parse(txtStockMinimo.Text);
+                nuevo.PorcentajeGanancia = decimal.Parse(txtPorcentajeGanancia.Text);
+                nuevo.ImagenUrl = txtImagenUrl.Text;
+                nuevo.Activo = true;
+
+                ProductoNegocio negocio = new ProductoNegocio();
+                if (Request.QueryString["id"] != null)
+                {
+                    nuevo.Id = int.Parse(Request.QueryString["id"]);
+                    negocio.modificar(nuevo);
+                }
+                else
+                {
+                    negocio.agregar(nuevo);
+                }
+
+                Response.Redirect("Productos.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+            }
         }
 
         protected void btnInactivar_Click(object sender, EventArgs e)
@@ -120,8 +182,7 @@ namespace WebApplication1
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex.ToString());
-                //Response.Redirect("Error.aspx");
+                Session.Add("error", ex);
             }
         }
     }

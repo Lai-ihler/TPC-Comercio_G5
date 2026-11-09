@@ -87,6 +87,15 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.TextBox txtCosto;
 
         /// <summary>
+        /// Control lblErrorCosto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorCosto;
+
+        /// <summary>
         /// Control lblPrecioVenta.
         /// </summary>
         /// <remarks>
@@ -105,6 +114,15 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.TextBox txtPrecioVenta;
 
         /// <summary>
+        /// Control lblErrorPrecioVenta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorPrecioVenta;
+
+        /// <summary>
         /// Control lblMarca.
         /// </summary>
         /// <remarks>
@@ -112,6 +130,15 @@ namespace WebApplication1
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMarca;
+
+        /// <summary>
+        /// Control lblErrorMarca.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorMarca;
 
         /// <summary>
         /// Control ddlMarca.
@@ -141,6 +168,15 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.DropDownList ddlCategoria;
 
         /// <summary>
+        /// Control lblErrorCategoria.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorCategoria;
+
+        /// <summary>
         /// Control lblProveedores.
         /// </summary>
         /// <remarks>
@@ -157,6 +193,15 @@ namespace WebApplication1
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlProveedor;
+
+        /// <summary>
+        /// Control lblErrorProveedor.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorProveedor;
 
         /// <summary>
         /// Control lblStockActual.
@@ -177,6 +222,15 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.TextBox txtStockActual;
 
         /// <summary>
+        /// Control lblErrorStockActual.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorStockActual;
+
+        /// <summary>
         /// Control lblStockMinimo.
         /// </summary>
         /// <remarks>
@@ -193,6 +247,15 @@ namespace WebApplication1
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtStockMinimo;
+
+        /// <summary>
+        /// Control lblErrorStockMinimo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorStockMinimo;
 
         /// <summary>
         /// Control lblPorcentajeGanancia.
