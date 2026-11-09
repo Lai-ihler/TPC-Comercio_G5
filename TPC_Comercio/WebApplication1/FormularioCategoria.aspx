@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1>Formulario de categoría</h1>
+    <h1>Administrar Categorias</h1>
     <p>Completa los datos de la categoría.</p>
 
     <div class="row">
@@ -17,9 +17,18 @@
             </div>
 
 
-            <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary" />
+            <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary" onClick="btnGuardar_Click" />
+     
+
+       <asp:Button ID="btnInactivar" runat="server" Text="Inactivar" CssClass="btn btn-warning" OnClick="btnInactivar_Click" />
+     
+        
             <asp:HyperLink ID="lnkCancelar" runat="server" 
                 NavigateUrl="Categorias.aspx">Cancelar</asp:HyperLink>
+             <p>
+     
+
+                
         </div>
     </div>
 </asp:Content>

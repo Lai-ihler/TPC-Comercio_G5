@@ -11,12 +11,14 @@
     </p>
 
     <asp:GridView ID="gvCategorias" runat="server" CssClass="table"
-        AutoGenerateColumns="False"
+        AutoGenerateColumns="False" DataKeyNames="Id"
+        OnSelectedIndexChanged="gvCategorias_SelectedIndexChanged"
         EmptyDataText="No hay categorías para mostrar.">
         <Columns>
             <asp:BoundField DataField="Id" HeaderText="ID" />
             <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />
             <asp:BoundField DataField="Activo" HeaderText="Activo" />
+             <asp:CommandField HeaderText="Editar" ShowSelectButton="true" SelectText="✍" />
         </Columns>
     </asp:GridView>
 </asp:Content>

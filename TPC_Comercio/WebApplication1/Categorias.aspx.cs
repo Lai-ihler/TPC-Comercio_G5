@@ -19,5 +19,10 @@ namespace WebApplication1
                 gvCategorias.DataBind();
             }
         }
+        protected void gvCategorias_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string id = gvCategorias.SelectedDataKey.Value.ToString();
+            Response.Redirect("FormularioCategoria.aspx?id=" + id);
+        }
     }
 }
