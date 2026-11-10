@@ -9,15 +9,19 @@ namespace Negocio
 {
     public class ProveedorNegocio
     {
-        private const string SELECT_DATABASE = "SELECT * FROM PROVEEDOR";
-        public List<Proveedor> listar(bool activos = true)
+        public List<Proveedor> listar(string id = "")
         {
             List<Proveedor> lista = new List<Proveedor>();
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta(SELECT_DATABASE);
-                datos.setearParametro("@Activo", activos);
+                string consulta = "SELECT * FROM PROVEEDOR";
+                if (id != "")
+                {
+                    consulta += " WHERE ID = @id";
+                    datos.setearParametro("@id", int.Parse(id));
+                }
+                datos.setearConsulta(consulta);
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
@@ -32,6 +36,10 @@ namespace Negocio
                     lista.Add(p);
                 }
                 return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
             finally
             {
@@ -50,6 +58,29 @@ namespace Negocio
                 datos.setearParametro("@email", nuevo.Email);
                 datos.setearParametro("@telefono", nuevo.Telefono);
                 datos.setearParametro("@direccion", nuevo.Direccion);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void modificar(Proveedor proveedor)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("UPDATE PROVEEDOR SET RazonSocial = @razonSocial, Cuit = @cuit, Email = @email, Telefono = @telefono, Direccion = @direccion WHERE ID = @id");
+                datos.setearParametro("@razonSocial", proveedor.RazonSocial);
+                datos.setearParametro("@cuit", proveedor.Cuit);
+                datos.setearParametro("@email", proveedor.Email);
+                datos.setearParametro("@telefono", proveedor.Telefono);
+                datos.setearParametro("@direccion", proveedor.Direccion);
+                datos.setearParametro("@id", proveedor.Id);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

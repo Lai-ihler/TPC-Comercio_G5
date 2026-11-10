@@ -12,6 +12,8 @@
             runat="server"
             CssClass="table"
             AutoGenerateColumns="False"
+            DataKeyNames="Id"
+            OnSelectedIndexChanged="gvProveedores_SelectedIndexChanged"
             EmptyDataText="No hay proveedores para mostrar.">
 
             <columns>
@@ -20,6 +22,8 @@
                 <asp:BoundField DataField="Email" HeaderText="Email" />
                 <asp:BoundField DataField="Telefono" HeaderText="Telefono" />
                 <asp:BoundField DataField="Direccion" HeaderText="Direccion" />
+                <asp:BoundField DataField="Activo" HeaderText="Activo" />
+                <asp:CommandField HeaderText="Editar" ShowSelectButton="true" SelectText="✍" />
             </columns>
 
         </asp:GridView>

@@ -15,10 +15,15 @@ namespace WebApplication1
             if (!IsPostBack)
             {
                 ProveedorNegocio p = new ProveedorNegocio();
-                
+
                 gvProveedores.DataSource = p.listar();
                 gvProveedores.DataBind();
             }
         }
+        protected void gvProveedores_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string id = gvProveedores.SelectedDataKey.Value.ToString();
+            Response.Redirect("FormularioProveedor.aspx?id=" + id);
+        }
     }
-}
+    }

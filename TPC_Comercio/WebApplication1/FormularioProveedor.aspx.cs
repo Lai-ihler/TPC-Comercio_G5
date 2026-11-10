@@ -14,10 +14,28 @@ namespace WebApplication1
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            try
+            {
+                string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
+                if (id != "" && !IsPostBack)
+                {
+                    ProveedorNegocio negocio = new ProveedorNegocio();
+                    Proveedor seleccionado = (negocio.listar(id))[0];
+                    txtRazonSocial.Text = seleccionado.RazonSocial;
+                    txtCuit.Text = seleccionado.Cuit;
+                    txtEmail.Text = seleccionado.Email;
+                    txtTelefono.Text = seleccionado.Telefono;
+                    txtDireccion.Text = seleccionado.Direccion;
+                }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                throw;
+            }
         }
         protected void btnGuardar_Click(object sender, EventArgs e)
-       {
+        {
             try
             {
                 Proveedor nuevo = new Proveedor();
@@ -26,10 +44,18 @@ namespace WebApplication1
                 nuevo.RazonSocial = txtRazonSocial.Text;
                 nuevo.Cuit = txtCuit.Text;
                 nuevo.Email = txtEmail.Text;
-               nuevo.Telefono = txtTelefono.Text;
+                nuevo.Telefono = txtTelefono.Text;
                 nuevo.Direccion = txtDireccion.Text;
 
-                negocio.agregar(nuevo);
+                if (Request.QueryString["id"] != null)
+                {
+                    nuevo.Id = int.Parse(Request.QueryString["id"]);
+                    negocio.modificar(nuevo);
+                }
+                else
+
+                    negocio.agregar(nuevo);
+
                 Response.Redirect("Proveedores.aspx", false);
             }
             catch (Exception ex)
