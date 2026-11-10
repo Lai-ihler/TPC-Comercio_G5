@@ -38,5 +38,28 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public void agregar(Proveedor nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("INSERT INTO PROVEEDOR (RazonSocial, Cuit, Email, Telefono, Direccion, Activo) VALUES (@razonSocial, @cuit, @email, @telefono, @direccion, 1)");
+                datos.setearParametro("@razonSocial", nuevo.RazonSocial);
+                datos.setearParametro("@cuit", nuevo.Cuit);
+                datos.setearParametro("@email", nuevo.Email);
+                datos.setearParametro("@telefono", nuevo.Telefono);
+                datos.setearParametro("@direccion", nuevo.Direccion);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

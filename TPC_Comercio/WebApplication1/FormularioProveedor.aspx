@@ -34,7 +34,7 @@
                 <asp:Label ID="lblTelefono" runat="server" CssClass="form-label"
                     AssociatedControlID="lblTelefono" Text="Telefono" />
 
-                <asp:TextBox ID="txtPerfil" runat="server" CssClass="form-control" />
+                <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control" />
             </div>
 
             <div class="mb-3">
@@ -45,7 +45,7 @@
             </div>
 
             <p>
-                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary" />
+                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary" OnClick="btnGuardar_Click" />
                 <asp:HyperLink ID="lnkCancelar" runat="server"
                     NavigateUrl="Proveedores.aspx">Cancelar</asp:HyperLink>
             </p>
