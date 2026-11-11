@@ -16,23 +16,27 @@ namespace WebApplication1
         {
             try
             {
-                string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
-
-                if (id != "" && !IsPostBack)
+                if (!IsPostBack)
                 {
+                    string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
+
                     btnInactivar.Visible = id != "";
-                    ProveedorNegocio negocio = new ProveedorNegocio();
-                    Proveedor seleccionado = (negocio.listar(id))[0];
-                    txtRazonSocial.Text = seleccionado.RazonSocial;
-                    txtCuit.Text = seleccionado.Cuit;
-                    txtEmail.Text = seleccionado.Email;
-                    txtTelefono.Text = seleccionado.Telefono;
-                    txtDireccion.Text = seleccionado.Direccion;
 
-                    Session["proveedorSeleccionado"] = seleccionado;
+                    if (id != "")
+                    {
+                        ProveedorNegocio negocio = new ProveedorNegocio();
+                        Proveedor seleccionado = (negocio.listar(id))[0];
+                        txtRazonSocial.Text = seleccionado.RazonSocial;
+                        txtCuit.Text = seleccionado.Cuit;
+                        txtEmail.Text = seleccionado.Email;
+                        txtTelefono.Text = seleccionado.Telefono;
+                        txtDireccion.Text = seleccionado.Direccion;
 
-                    if (!seleccionado.Activo)
-                        btnInactivar.Text = "Reactivar";
+                        Session["proveedorSeleccionado"] = seleccionado;
+
+                        if (!seleccionado.Activo)
+                            btnInactivar.Text = "Reactivar";
+                    }
                 }
             }
             catch (Exception ex)

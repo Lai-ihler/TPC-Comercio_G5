@@ -5,12 +5,20 @@
     <div>
         <h1>Clientes</h1>
         <p>Listado de clientes del comercio</p>
+
+        <asp:HyperLink ID="lnkNuevo" runat="server"
+            NavigateUrl="FormularioCliente.aspx"
+            CssClass="btn btn-primary mb-3">
+            Nuevo cliente
+        </asp:HyperLink>
     
         <asp:GridView
             ID="gvClientes"
             runat="server"
             CssClass="table"
             AutoGenerateColumns="False"
+            DataKeyNames="Id"
+            OnSelectedIndexChanged="gvClientes_SelectedIndexChanged"
             EmptyDataText="No hay clientes para mostrar.">
     
             <Columns>
@@ -21,6 +29,7 @@
                 <asp:BoundField DataField="Email" HeaderText="Email" />
                 <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
                 <asp:BoundField DataField="Direccion" HeaderText="Dirección" />
+                <asp:CommandField HeaderText="Accion" ShowSelectButton="true" SelectText="Modificar" />
             </Columns>
     
         </asp:GridView>

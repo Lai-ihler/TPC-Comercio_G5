@@ -20,5 +20,11 @@ namespace WebApplication1
                 gvClientes.DataBind();
             }
         }
+
+        protected void gvClientes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string id = gvClientes.SelectedDataKey.Value.ToString();
+            Response.Redirect("FormularioCliente.aspx?id=" + id);
+        }
     }
 }

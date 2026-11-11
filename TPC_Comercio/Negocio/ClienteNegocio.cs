@@ -40,5 +40,80 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public void agregar(Cliente nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(
+                    "INSERT INTO CLIENTE (Nombre, Apellido, Dni, Email, Telefono, Direccion, Activo) " +
+                    "VALUES (@nombre, @apellido, @dni, @email, @telefono, @direccion, 1)"
+                );
+
+                datos.setearParametro("@nombre", nuevo.Nombre);
+                datos.setearParametro("@apellido", nuevo.Apellido);
+                datos.setearParametro("@dni", nuevo.Dni);
+                datos.setearParametro("@email", nuevo.Email);
+                datos.setearParametro("@telefono", nuevo.Telefono);
+                datos.setearParametro("@direccion", nuevo.Direccion);
+
+                datos.ejecutarAccion();
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void modificar(Cliente cliente)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(
+                    "UPDATE CLIENTE SET Nombre = @nombre, Apellido = @apellido, " +
+                    "Dni = @dni, Email = @email, Telefono = @telefono, " +
+                    "Direccion = @direccion WHERE ID = @id"
+                );
+
+                datos.setearParametro("@nombre", cliente.Nombre);
+                datos.setearParametro("@apellido", cliente.Apellido);
+                datos.setearParametro("@dni", cliente.Dni);
+                datos.setearParametro("@email", cliente.Email);
+                datos.setearParametro("@telefono", cliente.Telefono);
+                datos.setearParametro("@direccion", cliente.Direccion);
+                datos.setearParametro("@id", cliente.Id);
+
+                datos.ejecutarAccion();
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminarLogico(int id, bool activo = false)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(
+                    "UPDATE CLIENTE SET Activo = @activo WHERE ID = @id"
+                );
+
+                datos.setearParametro("@activo", activo);
+                datos.setearParametro("@id", id);
+
+                datos.ejecutarAccion();
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
