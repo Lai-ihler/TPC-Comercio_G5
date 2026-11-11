@@ -123,6 +123,7 @@
                 <asp:HyperLink ID="lnkCancelar" runat="server"
                     NavigateUrl="Productos.aspx">Cancelar</asp:HyperLink>
             </div>
+
         </div>
     </div>
 </asp:Content>

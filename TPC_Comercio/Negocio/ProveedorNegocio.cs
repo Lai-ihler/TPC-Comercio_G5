@@ -92,5 +92,24 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public void eliminarLogico(int id, bool activo = false)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(
+                    "UPDATE PROVEEDOR SET Activo = @Activo WHERE ID = @Id"
+                );
+                datos.setearParametro("@Activo", activo);
+                datos.setearParametro("@Id", id);
+                datos.ejecutarAccion();
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

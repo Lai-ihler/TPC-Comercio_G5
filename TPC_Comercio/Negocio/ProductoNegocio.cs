@@ -70,6 +70,34 @@ namespace Negocio
      
         }
 
+        public string generarCodigo()
+        {
+            int ultimoNumero = 0;
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(
+                    "SELECT Codigo FROM PRODUCTO WHERE Codigo LIKE 'PROD%'"
+                );
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    string codigo = (string)datos.Lector["Codigo"];
+                    int numero = int.Parse(codigo.Substring(4));
+
+                    if (numero > ultimoNumero)
+                        ultimoNumero = numero;
+                }
+
+                return "PROD" + (ultimoNumero + 1).ToString("D3");
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public void agregar(Producto nuevo)
         {
             AccesoDatos datos = new AccesoDatos();

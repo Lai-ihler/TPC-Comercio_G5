@@ -13,6 +13,8 @@ namespace WebApplication1
     {
         public void Page_Load(object sender, EventArgs e)
         {
+            txtCodigo.Enabled = false;
+
             if (!IsPostBack)
             {
                 MarcaNegocio marcaNegocio = new MarcaNegocio();
@@ -64,6 +66,11 @@ namespace WebApplication1
                     if (!seleccionado.Activo)
                         btnInactivar.Text = "Reactivar";
                 }
+                else
+                {
+                    ProductoNegocio negocio = new ProductoNegocio();
+                    txtCodigo.Text = negocio.generarCodigo();
+                }
             }
         }
 
@@ -113,9 +120,9 @@ namespace WebApplication1
                     return;
                 }
 
-                if (stockActual < stockMinimo)
+                if (stockActual <= stockMinimo)
                 {
-                    lblErrorStockActual.Text = "El stock actual debe ser mayor o igual al stock mínimo.";
+                    lblErrorStockActual.Text = "El stock actual debe ser mayor al stock minimo.";
                     return; 
                 }
 
@@ -164,6 +171,7 @@ namespace WebApplication1
             catch (Exception ex)
             {
                 Session.Add("error", ex);
+                throw;
             }
         }
 
@@ -183,6 +191,7 @@ namespace WebApplication1
             catch (Exception ex)
             {
                 Session.Add("error", ex);
+                throw;
             }
         }
     }

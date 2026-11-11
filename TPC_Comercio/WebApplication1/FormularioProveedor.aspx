@@ -46,6 +46,7 @@
 
             <p>
                 <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary" OnClick="btnGuardar_Click" />
+                <asp:Button ID="btnInactivar" runat="server" Text="Inactivar" CssClass="btn btn-warning" OnClick="btnInactivar_Click" />
                 <asp:HyperLink ID="lnkCancelar" runat="server"
                     NavigateUrl="Proveedores.aspx">Cancelar</asp:HyperLink>
             </p>

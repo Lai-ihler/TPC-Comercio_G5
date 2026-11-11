@@ -17,8 +17,10 @@ namespace WebApplication1
             try
             {
                 string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
+
                 if (id != "" && !IsPostBack)
                 {
+                    btnInactivar.Visible = id != "";
                     ProveedorNegocio negocio = new ProveedorNegocio();
                     Proveedor seleccionado = (negocio.listar(id))[0];
                     txtRazonSocial.Text = seleccionado.RazonSocial;
@@ -26,6 +28,11 @@ namespace WebApplication1
                     txtEmail.Text = seleccionado.Email;
                     txtTelefono.Text = seleccionado.Telefono;
                     txtDireccion.Text = seleccionado.Direccion;
+
+                    Session["proveedorSeleccionado"] = seleccionado;
+
+                    if (!seleccionado.Activo)
+                        btnInactivar.Text = "Reactivar";
                 }
             }
             catch (Exception ex)
@@ -57,6 +64,31 @@ namespace WebApplication1
                     negocio.agregar(nuevo);
 
                 Response.Redirect("Proveedores.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+                throw;
+            }
+        }
+
+        protected void btnInactivar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ProveedorNegocio negocio = new ProveedorNegocio();
+                Proveedor seleccionado =
+                    (Proveedor)Session["proveedorSeleccionado"];
+
+                if (seleccionado != null)
+                {
+                    negocio.eliminarLogico(
+                        seleccionado.Id,
+                        !seleccionado.Activo
+                    );
+
+                    Response.Redirect("Proveedores.aspx", false);
+                }
             }
             catch (Exception ex)
             {
