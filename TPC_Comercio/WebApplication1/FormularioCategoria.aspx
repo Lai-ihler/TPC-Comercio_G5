@@ -13,7 +13,9 @@
                 <asp:Label ID="lblDescripcion" runat="server" CssClass="form-label"
                     AssociatedControlID="txtDescripcion" Text="Descripcion" />
                 
-                <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" />
+                 <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" MaxLength="20" />
+                <asp:RequiredFieldValidator ErrorMessage="Ingresá el nombre de la categoría." ControlToValidate="txtDescripcion" CssClass="text-danger" runat="server" />
+                <asp:Label ID="lblErrorDescripcion" runat="server" CssClass="text-danger" />
             </div>
 
 
@@ -25,7 +27,7 @@
         
             <asp:HyperLink ID="lnkCancelar" runat="server" 
                 NavigateUrl="Categorias.aspx">Cancelar</asp:HyperLink>
-             <p>
+             
      
 
                 

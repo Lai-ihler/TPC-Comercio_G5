@@ -36,16 +36,30 @@ namespace WebApplication1
                 Session.Add("error", ex);
                 throw;
             }
-        
+
         }
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
+                Page.Validate();
+                if (!Page.IsValid)
+                    return;
+
                 Categoria nueva = new Categoria();
                 CategoriaNegocio negocio = new CategoriaNegocio();
 
-                nueva.Descripcion = txtDescripcion.Text;
+                lblErrorDescripcion.Text = "";
+                string descripcion = txtDescripcion.Text.Trim();
+
+                int idActual = Request.QueryString["id"] != null ? int.Parse(Request.QueryString["id"]) : 0;
+                if (negocio.existe(descripcion, idActual))
+                {
+                    lblErrorDescripcion.Text = "Esa categoría ya existe.";
+                    return;
+                }
+
+                nueva.Descripcion = descripcion;
 
                 if (Request.QueryString["id"] != null)
                 {
