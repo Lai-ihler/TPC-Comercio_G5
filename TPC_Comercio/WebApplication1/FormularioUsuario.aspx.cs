@@ -23,6 +23,7 @@ namespace WebApplication1
                 ddlPerfil.Items.Insert(0, new ListItem("Seleccione un perfil", ""));
 
                 string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
+                btnInactivar.Visible = id != "";
 
                 if (id != "")
                 {
