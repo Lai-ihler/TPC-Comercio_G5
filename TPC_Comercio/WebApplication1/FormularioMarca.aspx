@@ -12,15 +12,17 @@
 
                 <asp:Label ID="lblDescripcion" runat="server" CssClass="form-label"
                     AssociatedControlID="txtDescripcion" Text="Nombre de la Marca" />
-                
-                <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" />
+
+                <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" MaxLength="20" />
+                <asp:RequiredFieldValidator ErrorMessage="Ingresá el nombre de la marca." ControlToValidate="txtDescripcion" CssClass="text-danger" runat="server" />
+                <asp:Label ID="lblErrorDescripcion" runat="server" CssClass="text-danger" />
 
             </div>
             <p>
-                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary"  OnClick="btnGuardar_Click"/>
+                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary" OnClick="btnGuardar_Click" />
 
-                  <asp:Button ID="btnInactivar" runat="server" Text="Inactivar" CssClass="btn btn-warning" OnClick="btnInactivar_Click" />
-                <asp:HyperLink ID="lnkCancelar" runat="server" 
+                <asp:Button ID="btnInactivar" runat="server" Text="Inactivar" CssClass="btn btn-warning" OnClick="btnInactivar_Click" />
+                <asp:HyperLink ID="lnkCancelar" runat="server"
                     NavigateUrl="Marcas.aspx">Cancelar</asp:HyperLink>
 
             </p>

@@ -41,10 +41,24 @@ namespace WebApplication1
         {
             try
             {
+                Page.Validate();
+                if (!Page.IsValid)
+                    return;
+
                 Marca nueva = new Marca();
                 MarcaNegocio negocio = new MarcaNegocio();
 
-                nueva.Descripcion = txtDescripcion.Text;
+                lblErrorDescripcion.Text = "";
+                string descripcion = txtDescripcion.Text.Trim();
+
+                int idActual = Request.QueryString["id"] != null ? int.Parse(Request.QueryString["id"]) : 0;
+                if (negocio.existe(descripcion, idActual))
+                {
+                    lblErrorDescripcion.Text = "Esa marca ya existe.";
+                    return;
+                }
+
+                nueva.Descripcion = descripcion;
 
                 if (Request.QueryString["id"] != null)
                 {
