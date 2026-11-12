@@ -29,7 +29,7 @@
                 <asp:BoundField DataField="Email" HeaderText="Email" />
                 <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
                 <asp:BoundField DataField="Direccion" HeaderText="Dirección" />
-                <asp:CommandField HeaderText="Accion" ShowSelectButton="true" SelectText="Modificar" />
+                <asp:CommandField HeaderText="Editar" ShowSelectButton="true" SelectText="✍" />
             </Columns>
     
         </asp:GridView>

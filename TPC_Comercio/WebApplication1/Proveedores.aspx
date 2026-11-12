@@ -7,6 +7,12 @@
         <h1>Proveedores</h1>
         <p>Listado de proveedores del comercio</p>
 
+        <asp:HyperLink ID="lnkNuevo" runat="server"
+            NavigateUrl="FormularioProveedor.aspx"
+            CssClass="btn btn-primary">
+            Nuevo Proveedor
+        </asp:HyperLink>
+
         <asp:GridView
             ID="gvProveedores"
             runat="server"
@@ -27,12 +33,6 @@
             </columns>
 
         </asp:GridView>
-        <p>
-            <asp:HyperLink ID="lnkNuevo" runat="server"
-                NavigateUrl="FormularioProveedor.aspx"
-                CssClass="btn btn-primary">
-                Nuevo Proveedor
-            </asp:HyperLink>
-        </p>
+
     </div>
 </asp:Content>

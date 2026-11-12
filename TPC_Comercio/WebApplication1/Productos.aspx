@@ -26,8 +26,7 @@
             <asp:BoundField DataField="Proveedor.RazonSocial" HeaderText="Proveedor" />
             <asp:BoundField DataField="StockActual" HeaderText="Stock actual" />
             <asp:BoundField DataField="Activo" HeaderText="Activo" />
-            <asp:CommandField HeaderText="Accion"
-                ShowSelectButton="True" SelectText="Modificar" />
+            <asp:CommandField HeaderText="Editar" ShowSelectButton="true" SelectText="✍" />
         </Columns>
     </asp:GridView>
 </asp:Content>

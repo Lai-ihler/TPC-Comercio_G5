@@ -7,6 +7,12 @@
         <h1>Usuarios</h1>
         <p>Listado de usuarios del comercio</p>
 
+        <asp:HyperLink ID="lnkNuevo" runat="server"
+            NavigateUrl="FormularioProveedor.aspx"
+            CssClass="btn btn-primary">
+            Nuevo Proveedor
+        </asp:HyperLink>
+
         <asp:GridView
             ID="gvUsuarios"
             runat="server"
@@ -28,17 +34,10 @@
                         <%# Eval("Perfil.Descripcion") %>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:CommandField HeaderText="Accion"
-                    ShowSelectButton="True" SelectText="Modificar" />
+                <asp:CommandField HeaderText="Editar" ShowSelectButton="true" SelectText="✍" />
             </Columns>
 
         </asp:GridView>
-        <p>
-            <asp:HyperLink ID="lnkNuevo" runat="server"
-                NavigateUrl="FormularioUsuario.aspx"
-                CssClass="btn btn-primary">
-                Nuevo Usuario
-            </asp:HyperLink>
-        </p>
+                    
     </div>
 </asp:Content>
