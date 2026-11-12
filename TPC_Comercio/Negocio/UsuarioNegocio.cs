@@ -9,7 +9,7 @@ namespace Negocio
 {
     public class UsuarioNegocio
     {
-        private const string SELECT_BASE = "SELECT U.ID, U.NombreUsuario, U.Pass, U.Nombre, U.Apellido, U.Email, P.Descripcion AS PERFIL, U.Activo FROM USUARIO U INNER JOIN PERFIL P ON P.ID = U.Perfil";
+        private const string SELECT_BASE = "SELECT U.ID, U.NombreUsuario, U.Pass, U.Nombre, U.Apellido, U.Email, P.ID AS IDPERFIL, P.Descripcion AS PERFIL, U.Activo FROM USUARIO U INNER JOIN PERFIL P ON P.ID = U.Perfil";
         public List<Usuario> listar(string id = "")
         {
             List<Usuario> lista = new List<Usuario>();
@@ -37,6 +37,7 @@ namespace Negocio
                     u.Email = (string)datos.Lector["Email"];
                     u.Perfil = new Perfil()
                     {
+                        Id = (int)datos.Lector["IDPERFIL"],
                         Descripcion = (string)datos.Lector["PERFIL"]
                     };
                     u.Activo = (bool)datos.Lector["Activo"];
@@ -89,7 +90,6 @@ namespace Negocio
                 datos.setearParametro("@Apellido", usuario.Apellido);
                 datos.setearParametro("@Email", usuario.Email);
                 datos.setearParametro("@Perfil", usuario.Perfil.Id);
-                datos.setearParametro("@Activo", usuario.Activo);
                 datos.setearParametro("@Id", usuario.Id);
 
                 datos.ejecutarAccion();

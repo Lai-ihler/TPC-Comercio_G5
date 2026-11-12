@@ -46,28 +46,37 @@ namespace WebApplication1
         }
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            Usuario u = new Usuario();
-            u.NombreUsuario = txtNombreUsuario.Text;
-            u.Pass = txtPass.Text;
-            u.Nombre = txtNombre.Text;
-            u.Apellido = txtApellido.Text;
-            u.Email = txtEmail.Text;
-            u.Perfil = new Perfil();
-            u.Perfil.Id = int.Parse(ddlPerfil.SelectedValue);
-            u.Activo = true;
-
-            UsuarioNegocio un = new UsuarioNegocio();
-            if (Request.QueryString["id"] != null)
+            try
             {
-                u.Id = int.Parse(Request.QueryString["id"]);
-                un.modificar(u);
-            }
-            else
-            {
-                un.agregar(u);
-            }
 
-            Response.Redirect("Usuarios.aspx", false);
+                Usuario u = new Usuario();
+                u.NombreUsuario = txtNombreUsuario.Text;
+                u.Pass = txtPass.Text;
+                u.Nombre = txtNombre.Text;
+                u.Apellido = txtApellido.Text;
+                u.Email = txtEmail.Text;
+                u.Perfil = new Perfil();
+                u.Perfil.Id = int.Parse(ddlPerfil.SelectedValue);
+                u.Activo = true;
+
+                UsuarioNegocio un = new UsuarioNegocio();
+                if (Request.QueryString["id"] != null)
+                {
+                    u.Id = int.Parse(Request.QueryString["id"]);
+                    un.modificar(u);
+                }
+                else
+                {
+                    un.agregar(u);
+                }
+
+                Response.Redirect("Usuarios.aspx", false);
+            }
+            catch(Exception ex) 
+            {
+                Session.Add("error", ex);
+                throw;
+            }
         }
         protected void btnInactivar_Click(object sender, EventArgs e)
         {
@@ -85,6 +94,7 @@ namespace WebApplication1
             catch (Exception ex)
             {
                 Session.Add("error", ex.ToString());
+                throw;
             }
         }
     }
