@@ -111,5 +111,25 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public bool existe(string cuit, int idExcluir = 0)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("SELECT ID FROM PROVEEDOR WHERE Cuit = @cuit AND ID <> @id");
+                datos.setearParametro("@cuit", cuit);
+                datos.setearParametro("@id", idExcluir);
+                datos.ejecutarLectura();
+                return datos.Lector.Read();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

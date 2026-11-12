@@ -49,14 +49,28 @@ namespace WebApplication1
         {
             try
             {
+                Page.Validate();
+                if (!Page.IsValid)
+                    return;
+
                 Proveedor nuevo = new Proveedor();
                 ProveedorNegocio negocio = new ProveedorNegocio();
 
-                nuevo.RazonSocial = txtRazonSocial.Text;
-                nuevo.Cuit = txtCuit.Text;
-                nuevo.Email = txtEmail.Text;
-                nuevo.Telefono = txtTelefono.Text;
-                nuevo.Direccion = txtDireccion.Text;
+                lblErrorCuit.Text = "";
+                string cuit = txtCuit.Text.Trim();
+
+                int idActual = Request.QueryString["id"] != null ? int.Parse(Request.QueryString["id"]) : 0;
+                if (negocio.existe(cuit, idActual))
+                {
+                    lblErrorCuit.Text = "Ya existe un proveedor con ese CUIT.";
+                    return;
+                }
+
+                nuevo.RazonSocial = txtRazonSocial.Text.Trim();
+                nuevo.Cuit = cuit;
+                nuevo.Email = txtEmail.Text.Trim();
+                nuevo.Telefono = txtTelefono.Text.Trim();
+                nuevo.Direccion = txtDireccion.Text.Trim();
 
                 if (Request.QueryString["id"] != null)
                 {
