@@ -115,5 +115,27 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public bool existe(string dni, int idExcluir = 0)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(
+                    "SELECT ID FROM CLIENTE WHERE Dni = @dni AND ID <> @id"
+                );
+
+                datos.setearParametro("@dni", dni);
+                datos.setearParametro("@id", idExcluir);
+                datos.ejecutarLectura();
+
+                return datos.Lector.Read();
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

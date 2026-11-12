@@ -63,15 +63,19 @@ namespace WebApplication1
         {
             try
             {
+                Page.Validate();
+
+                if (!Page.IsValid) return;
+
                 Cliente cliente = new Cliente();
                 ClienteNegocio negocio = new ClienteNegocio();
 
-                cliente.Nombre = txtNombre.Text;
-                cliente.Apellido = txtApellido.Text;
-                cliente.Dni = txtDni.Text;
-                cliente.Email = txtEmail.Text;
-                cliente.Telefono = txtTelefono.Text;
-                cliente.Direccion = txtDireccion.Text;
+                cliente.Nombre = txtNombre.Text.Trim();
+                cliente.Apellido = txtApellido.Text.Trim();
+                cliente.Dni = txtDni.Text.Trim();
+                cliente.Email = txtEmail.Text.Trim();
+                cliente.Telefono = txtTelefono.Text.Trim();
+                cliente.Direccion = txtDireccion.Text.Trim();
 
                 if (Request.QueryString["id"] != null)
                 {
@@ -114,6 +118,17 @@ namespace WebApplication1
                 Session.Add("error", ex);
                 throw;
             }
+        }
+
+        protected void cvDni_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            ClienteNegocio negocio = new ClienteNegocio();
+            int idExcluir = 0;
+
+            if (Request.QueryString["id"] != null)
+                idExcluir = int.Parse(Request.QueryString["id"]);
+
+            args.IsValid = !negocio.existe(args.Value.Trim(), idExcluir);
         }
     }
 }

@@ -32,7 +32,7 @@
                 <asp:Label ID="lblEmail" runat="server" CssClass="form-label"
                     AssociatedControlID="txtEmail" Text="Email" />
 
-                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" />
+                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" MaxLength="100"/>
                 <asp:RequiredFieldValidator ErrorMessage="Ingresá el email." ControlToValidate="txtEmail" CssClass="text-danger" Display="Dynamic" runat="server" />
                 <asp:RegularExpressionValidator ErrorMessage="Ingresá un email válido." ControlToValidate="txtEmail" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="text-danger" Display="Dynamic" runat="server" />
             </div>

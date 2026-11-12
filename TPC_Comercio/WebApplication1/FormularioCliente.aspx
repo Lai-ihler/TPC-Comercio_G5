@@ -13,7 +13,8 @@
                     AssociatedControlID="txtNombre"
                     CssClass="form-label"
                     Text="Nombre" />
-                <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" />
+                <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" MaxLength="30" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtNombre" ErrorMessage="El nombre es obligatorio." CssClass="text-danger" Display="Dynamic"/>
             </div>
 
             <div class="mb-3">
@@ -21,7 +22,8 @@
                     AssociatedControlID="txtApellido"
                     CssClass="form-label"
                     Text="Apellido" />
-                <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" />
+                <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" MaxLength="30" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtApellido" ErrorMessage="El apellido es obligatorio." CssClass="text-danger" Display="Dynamic"/>
             </div>
 
             <div class="mb-3">
@@ -29,7 +31,10 @@
                     AssociatedControlID="txtDni"
                     CssClass="form-label"
                     Text="DNI" />
-                <asp:TextBox ID="txtDni" runat="server" CssClass="form-control" />
+                <asp:TextBox ID="txtDni" runat="server" CssClass="form-control" maxlength="9"/>
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDni" ErrorMessage="El DNI es obligatorio." CssClass="text-danger" Display="Dynamic"/>
+                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtDni" ValidationExpression="^[0-9]{7,9}$" ErrorMessage="El DNI debe tener entre 7 y 9 numeros." CssClass="text-danger" Display="Dynamic" />
+                <asp:CustomValidator ID="cvDni" runat="server" ControlToValidate="txtDni" OnServerValidate="cvDni_ServerValidate" ErrorMessage="Ya existe un cliente con ese DNI." CssClass="text-danger" Display="Dynamic" />
             </div>
 
             <div class="mb-3">
@@ -37,7 +42,9 @@
                     AssociatedControlID="txtEmail"
                     CssClass="form-label"
                     Text="Email" />
-                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" />
+                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" maxlength="100"/>
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtEmail" ErrorMessage="El email es obligatorio." CssClass="text-danger" Display="Dynamic" />
+                <asp:RegularExpressionValidator runat="server" ControlToValidate="txtEmail" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ErrorMessage="Ingresa un email valido." CssClass="text-danger" Display="Dynamic" />
             </div>
 
             <div class="mb-3">
@@ -45,7 +52,8 @@
                     AssociatedControlID="txtTelefono"
                     CssClass="form-label"
                     Text="Telefono" />
-                <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control" />
+                <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control" MaxLength="20" />
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtTelefono" ErrorMessage="El telefono es obligatorio." CssClass="text-danger" Display="Dynamic" />
             </div>
 
             <div class="mb-3">
@@ -53,7 +61,8 @@
                     AssociatedControlID="txtDireccion"
                     CssClass="form-label"
                     Text="Direccion" />
-                <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control" />
+                <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control" maxLength="50"/>
+                <asp:RequiredFieldValidator runat="server" ControlToValidate="txtDireccion" ErrorMessage="La direccion es obligatoria." CssClass="text-danger" Display="Dynamic" />
             </div>
 
             <p>

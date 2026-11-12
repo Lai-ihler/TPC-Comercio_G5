@@ -76,18 +76,23 @@ namespace WebApplication1
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            /// Validaciones que muestran mensajes de error si los campos no cumplen con los requisitos. Terminan en Producto nuevo = new Producto();
-            lblErrorCosto.Text = "";
-            lblErrorPrecioVenta.Text = "";
-            lblErrorMarca.Text = "";
-            lblErrorCategoria.Text = "";
-            lblErrorProveedor.Text = "";
-            lblErrorStockActual.Text = "";
-            lblErrorStockMinimo.Text = "";
 
             try
             {
-                if(ddlMarca.SelectedValue == "")
+                /// Validaciones que muestran mensajes de error si los campos no cumplen con los requisitos. Terminan en Producto nuevo = new Producto();
+                lblErrorCosto.Text = "";
+                lblErrorPrecioVenta.Text = "";
+                lblErrorMarca.Text = "";
+                lblErrorCategoria.Text = "";
+                lblErrorProveedor.Text = "";
+                lblErrorStockActual.Text = "";
+                lblErrorStockMinimo.Text = "";
+
+                Page.Validate();
+
+                if (!Page.IsValid) return;
+
+                if (ddlMarca.SelectedValue == "")
                 {
                     lblErrorMarca.Text = "Selecciona una marca.";
                     return;
@@ -105,6 +110,7 @@ namespace WebApplication1
 
                 decimal costo = decimal.Parse(txtCosto.Text);
                 decimal precioVenta = decimal.Parse(txtPrecioVenta.Text);
+                decimal porcentajeGanancia = decimal.Parse(txtPorcentajeGanancia.Text);
                 int stockActual = int.Parse(txtStockActual.Text);
                 int stockMinimo = int.Parse(txtStockMinimo.Text);
 
@@ -120,15 +126,22 @@ namespace WebApplication1
                     return;
                 }
 
-                if (stockActual <= stockMinimo)
+                if (stockActual <= 0)
                 {
-                    lblErrorStockActual.Text = "El stock actual debe ser mayor al stock minimo.";
+                    lblErrorStockActual.Text = "El stock actual debe ser mayor a cero.";
                     return; 
                 }
 
                 if (stockMinimo <= 0)
                 {
                     lblErrorStockMinimo.Text = "El stock minimo debe ser mayor a cero.";
+                    return;
+                }
+
+                if (stockActual < stockMinimo && !chkConfirmarStockBajo.Checked)
+                {
+                    lblErrorStockActual.Text =
+                        "El stock actual es menor al minimo. Marca la casilla si deseas continuar.";
                     return;
                 }
 
@@ -151,7 +164,7 @@ namespace WebApplication1
 
                 nuevo.StockActual = int.Parse(txtStockActual.Text);
                 nuevo.StockMinimo = int.Parse(txtStockMinimo.Text);
-                nuevo.PorcentajeGanancia = decimal.Parse(txtPorcentajeGanancia.Text);
+                nuevo.PorcentajeGanancia = porcentajeGanancia;
                 nuevo.ImagenUrl = txtImagenUrl.Text;
                 nuevo.Activo = true;
 
