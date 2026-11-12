@@ -45,10 +45,28 @@ namespace WebApplication1
                 }
             }
         }
+        protected void cvNombreUsuario_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            UsuarioNegocio un = new UsuarioNegocio();
+
+            int idExcluir = 0;
+
+            if (Request.QueryString["id"] != null)
+            {
+                idExcluir = int.Parse(Request.QueryString["id"]);
+            }
+
+            args.IsValid = !un.existe(args.Value, idExcluir);
+        }
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             try
             {
+                Page.Validate();
+                if (!Page.IsValid)
+                {
+                    return;
+                }
 
                 Usuario u = new Usuario();
                 u.NombreUsuario = txtNombreUsuario.Text;

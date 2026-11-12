@@ -23,6 +23,14 @@
                     ValidationExpression="^(?=.*\S).{1,20}$"
                     ErrorMessage="El nombre de usuario debe tener entre 1 y 20 caracteres."
                     ForeColor="Red" Display="Dynamic" />
+
+                <asp:CustomValidator
+                    ID="cvNombreUsuario"
+                    ControlToValidate="txtNombreUsuario"
+                    OnServerValidate="cvNombreUsuario_ServerValidate"
+                    ErrorMessage="Este nombre de usuario ya existe. Elija otro."
+                    ForeColor="Red"
+                    runat="server" />
             </div>
 
             <div class="mb-3">
