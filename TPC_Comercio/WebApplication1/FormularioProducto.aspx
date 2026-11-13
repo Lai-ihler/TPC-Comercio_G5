@@ -93,7 +93,7 @@
                         AssociatedControlID="txtStockActual" Text="Stock actual" />
                     <asp:TextBox ID="txtStockActual" runat="server" CssClass="form-control" />
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtStockActual" ErrorMessage="El stock actual es obligatorio." CssClass="text-danger" Display="Dynamic" />
-                    <asp:RegularExpressionValidator runat="server" ControlToValidate="txtStockActual" ValidationExpression="^-?[0-9]+(,[0-9]+)?$" ErrorMessage="El stock actual debe ser un numero entero." CssClass="text-danger" Display="Dynamic" />
+                    <asp:RegularExpressionValidator runat="server" ControlToValidate="txtStockActual" ValidationExpression="^-?[0-9]+$" ErrorMessage="El stock actual debe ser un numero entero." CssClass="text-danger" Display="Dynamic" />
                     <asp:Label ID="lblErrorStockActual" runat="server" CssClass="text-danger" />
                     <asp:CheckBox ID="chkConfirmarStockBajo" runat="server" Text="Confirmo que deseo guardar con stock debajo del minimo." />
                 </div>

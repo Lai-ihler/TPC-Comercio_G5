@@ -126,9 +126,9 @@ namespace WebApplication1
                     return;
                 }
 
-                if (stockActual <= 0)
+                if (stockActual < 0)
                 {
-                    lblErrorStockActual.Text = "El stock actual debe ser mayor a cero.";
+                    lblErrorStockActual.Text = "El stock actual no puede ser negativo.";
                     return; 
                 }
 

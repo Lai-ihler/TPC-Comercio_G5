@@ -8,9 +8,9 @@
         <p>Listado de usuarios del comercio</p>
 
         <asp:HyperLink ID="lnkNuevo" runat="server"
-            NavigateUrl="FormularioProveedor.aspx"
+            NavigateUrl="FormularioUsuario.aspx"
             CssClass="btn btn-primary">
-            Nuevo Proveedor
+            Nuevo Usuario
         </asp:HyperLink>
 
         <asp:GridView

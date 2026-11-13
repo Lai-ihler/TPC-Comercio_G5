@@ -83,6 +83,7 @@
     <Content Include="Marcas.aspx" />
     <Content Include="Productos.aspx" />
     <Content Include="Proveedores.aspx" />
+    <Content Include="Estilos.css" />
     <Content Include="Usuarios.aspx" />
     <Content Include="Ventas.aspx" />
     <Content Include="Web.config" />

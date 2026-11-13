@@ -1,0 +1,25 @@
+﻿
+:root {
+    --color-principal: #1d3557; /* barra de arriba */
+    --color-acento: #457b9d; /* botones */
+    --color-acento-oscuro: #35607a; /* botón con el mouse encima */
+}
+
+.navbar {
+    background-color: var(--color-principal);
+}
+
+.btn-primary {
+    background-color: var(--color-acento);
+    border-color: var(--color-acento);
+}
+
+    .btn-primary:hover {
+        background-color: var(--color-acento-oscuro);
+        border-color: var(--color-acento-oscuro);
+    }
+
+.inicio {
+    background: linear-gradient(135deg, var(--color-principal), var(--color-acento));
+    color: white;
+}
