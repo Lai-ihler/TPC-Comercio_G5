@@ -32,11 +32,10 @@ namespace WebApplication1
                 ddlCategoria.Items.Insert(0, new ListItem("Selecciona una categoria", ""));
 
                 ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
-                ddlProveedor.DataSource = proveedorNegocio.listar();
-                ddlProveedor.DataTextField = "RazonSocial";
-                ddlProveedor.DataValueField = "Id";
-                ddlProveedor.DataBind();
-                ddlProveedor.Items.Insert(0, new ListItem("Selecciona un proveedor", ""));
+                cblProveedores.DataSource = proveedorNegocio.listar();
+                cblProveedores.DataTextField = "RazonSocial";
+                cblProveedores.DataValueField = "Id";
+                cblProveedores.DataBind();
 
                 string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
                 btnInactivar.Visible = id != "";
@@ -56,7 +55,13 @@ namespace WebApplication1
 
                     ddlMarca.SelectedValue = seleccionado.Marca.Id.ToString();
                     ddlCategoria.SelectedValue = seleccionado.Categoria.Id.ToString();
-                    ddlProveedor.SelectedValue = seleccionado.Proveedor.Id.ToString();
+                    
+                    foreach (ListItem item in cblProveedores.Items)
+                    {
+                        item.Selected = seleccionado.ListaProveedores.Exists(
+                            x => x.Id.ToString() == item.Value
+                        );
+                    }
 
                     txtStockActual.Text = seleccionado.StockActual.ToString();
                     txtStockMinimo.Text = seleccionado.StockMinimo.ToString();
@@ -102,9 +107,21 @@ namespace WebApplication1
                     lblErrorCategoria.Text = "Selecciona una categoria.";
                     return;
                 }
-                if(ddlProveedor.SelectedValue == "")
+
+                bool hayProveedorSeleccionado = false;
+
+                foreach (ListItem item in cblProveedores.Items)
                 {
-                    lblErrorProveedor.Text = "Selecciona un proveedor.";
+                    if (item.Selected)
+                    {
+                        hayProveedorSeleccionado = true;
+                        break;
+                    }
+                }
+
+                if (!hayProveedorSeleccionado)
+                {
+                    lblErrorProveedor.Text = "Selecciona al menos un proveedor.";
                     return;
                 }
 
@@ -160,7 +177,19 @@ namespace WebApplication1
                 nuevo.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
 
                 nuevo.Proveedor = new Proveedor();
-                nuevo.Proveedor.Id = int.Parse(ddlProveedor.SelectedValue);
+                nuevo.ListaProveedores = new List<Proveedor>();
+
+                foreach (ListItem item in cblProveedores.Items)
+                {
+                    if (item.Selected)
+                    {
+                        Proveedor proveedor = new Proveedor();
+                        proveedor.Id = int.Parse(item.Value);
+                        nuevo.ListaProveedores.Add(proveedor);
+                    }
+                }
+
+                nuevo.Proveedor = nuevo.ListaProveedores[0];
 
                 nuevo.StockActual = int.Parse(txtStockActual.Text);
                 nuevo.StockMinimo = int.Parse(txtStockMinimo.Text);

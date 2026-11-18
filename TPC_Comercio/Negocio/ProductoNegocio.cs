@@ -9,7 +9,7 @@ namespace Negocio
 {
     public class ProductoNegocio
     {
-        private const string SELECT_BASE = "SELECT P.*, M.Descripcion AS MarcaDescripcion, C.Descripcion AS CategoriaDescripcion, PR.RazonSocial AS ProveedorRazonSocial FROM PRODUCTO P INNER JOIN MARCA M ON M.ID = P.Marca INNER JOIN CATEGORIA C ON C.ID = P.Categoria INNER JOIN PROVEEDOR PR ON PR.ID = P.Proveedor";
+        private const string SELECT_BASE = "SELECT P.*, M.Descripcion AS MarcaDescripcion, C.Descripcion AS CategoriaDescripcion, PR.RazonSocial AS ProveedorRazonSocial, PP.Proveedor AS ProveedorAsociadoId, PROV.RazonSocial AS ProveedorAsociado FROM PRODUCTO P INNER JOIN MARCA M ON M.ID = P.Marca INNER JOIN CATEGORIA C ON C.ID = P.Categoria INNER JOIN PROVEEDOR PR ON PR.ID = P.Proveedor LEFT JOIN PRODUCTO_PROVEEDOR PP ON PP.Producto = P.ID LEFT JOIN PROVEEDOR PROV ON PROV.ID = PP.Proveedor";
 
         public List<Producto> listar(string id = "")
         {
@@ -31,9 +31,28 @@ namespace Negocio
 
                 while (datos.Lector.Read())
                 {
+                    int idProducto = (int)datos.Lector["Id"];
+                    Producto existente = lista.Find(x => x.Id == idProducto);
+
+                    if (existente != null)
+                    {
+                        if (datos.Lector["ProveedorAsociado"] != DBNull.Value)
+                        {
+                            existente.Proveedores += ", " + (string)datos.Lector["ProveedorAsociado"];
+
+                            Proveedor proveedorAsociado = new Proveedor();
+                            proveedorAsociado.Id = (int)datos.Lector["ProveedorAsociadoId"];
+                            proveedorAsociado.RazonSocial = (string)datos.Lector["ProveedorAsociado"];
+
+                            existente.ListaProveedores.Add(proveedorAsociado);
+                        }
+
+                        continue;
+                    }
+
                     Producto p = new Producto();
 
-                    p.Id = (int)datos.Lector["Id"];
+                    p.Id = idProducto;
                     p.Codigo = (string)datos.Lector["Codigo"];
                     p.Nombre = (string)datos.Lector["Nombre"];
                     p.Descripcion = (string)datos.Lector["Descripcion"];
@@ -51,6 +70,23 @@ namespace Negocio
                     p.Proveedor = new Proveedor();
                     p.Proveedor.Id = (int)datos.Lector["Proveedor"];
                     p.Proveedor.RazonSocial = (string)datos.Lector["ProveedorRazonSocial"];
+
+                    p.ListaProveedores = new List<Proveedor>();
+
+                    if (datos.Lector["ProveedorAsociado"] == DBNull.Value)
+                    {
+                        p.Proveedores = "Sin proveedores asociados";
+                    }
+                    else
+                    {
+                        p.Proveedores = (string)datos.Lector["ProveedorAsociado"];
+
+                        Proveedor proveedorAsociado = new Proveedor();
+                        proveedorAsociado.Id = (int)datos.Lector["ProveedorAsociadoId"];
+                        proveedorAsociado.RazonSocial = (string)datos.Lector["ProveedorAsociado"];
+
+                        p.ListaProveedores.Add(proveedorAsociado);
+                    }
 
                     p.StockActual = (int)datos.Lector["StockActual"];
                     p.StockMinimo = (int)datos.Lector["StockMinimo"];
@@ -126,6 +162,24 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
+
+            AccesoDatos datosId = new AccesoDatos();
+
+            try
+            {
+                datosId.setearConsulta("SELECT ID FROM PRODUCTO WHERE Codigo = @Codigo");
+                datosId.setearParametro("@Codigo", nuevo.Codigo);
+                datosId.ejecutarLectura();
+
+                if (datosId.Lector.Read())
+                    nuevo.Id = (int)datosId.Lector["ID"];
+            }
+            finally
+            {
+                datosId.cerrarConexion();
+            }
+
+            guardarProveedores(nuevo.Id, nuevo.ListaProveedores);
         }
 
         public void modificar(Producto producto)
@@ -156,6 +210,9 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
+
+            guardarProveedores(producto.Id, producto.ListaProveedores);
+
         }
 
         public void eliminarLogico(int id,bool activo=false)
@@ -172,6 +229,44 @@ namespace Negocio
             finally
             {
                 datos.cerrarConexion();
+            }
+        }
+
+        private void guardarProveedores(int idProducto, List<Proveedor> proveedores)
+        {
+            AccesoDatos datosEliminar = new AccesoDatos();
+
+            try
+            {
+                datosEliminar.setearConsulta(
+                    "DELETE FROM PRODUCTO_PROVEEDOR WHERE Producto = @IdProducto"
+                );
+                datosEliminar.setearParametro("@IdProducto", idProducto);
+                datosEliminar.ejecutarAccion();
+            }
+            finally
+            {
+                datosEliminar.cerrarConexion();
+            }
+
+            foreach (Proveedor proveedor in proveedores)
+            {
+                AccesoDatos datosAgregar = new AccesoDatos();
+
+                try
+                {
+                    datosAgregar.setearConsulta(
+                        "INSERT INTO PRODUCTO_PROVEEDOR (Producto, Proveedor) " +
+                        "VALUES (@IdProducto, @IdProveedor)"
+                    );
+                    datosAgregar.setearParametro("@IdProducto", idProducto);
+                    datosAgregar.setearParametro("@IdProveedor", proveedor.Id);
+                    datosAgregar.ejecutarAccion();
+                }
+                finally
+                {
+                    datosAgregar.cerrarConexion();
+                }
             }
         }
     }

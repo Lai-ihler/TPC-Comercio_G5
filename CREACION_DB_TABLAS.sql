@@ -93,6 +93,22 @@ CREATE TABLE PRODUCTO
     Activo BIT NOT NULL
 );
 
+CREATE TABLE PRODUCTO_PROVEEDOR
+(
+    Producto INT NOT NULL
+        CONSTRAINT FK_ProductoProveedor_IdProducto
+        FOREIGN KEY (Producto)
+        REFERENCES PRODUCTO(ID),
+
+    Proveedor INT NOT NULL
+        CONSTRAINT FK_ProductoProveedor_IdProveedor
+        FOREIGN KEY (Proveedor)
+        REFERENCES PROVEEDOR(ID),
+
+    CONSTRAINT PK_ProductoProveedor
+        PRIMARY KEY (Producto, Proveedor)
+);
+
 CREATE TABLE COMPRA
 (
     ID INT PRIMARY KEY IDENTITY(1, 1),

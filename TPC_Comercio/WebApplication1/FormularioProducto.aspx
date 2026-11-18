@@ -79,8 +79,8 @@
                 <div class="mb-3">
                     <asp:Label ID="lblProveedores" runat="server" CssClass="form-label" Text="Proveedores" />
 
-                    <asp:DropDownList ID="ddlProveedor" runat="server" CssClass="form-select">
-                    </asp:DropDownList>
+                    <asp:CheckBoxList ID="cblProveedores" runat="server" CssClass="form-check">
+                    </asp:CheckBoxList>
                     <asp:Label ID="lblErrorProveedor" runat="server" CssClass="text-danger" />
                 </div>
             </fieldset>

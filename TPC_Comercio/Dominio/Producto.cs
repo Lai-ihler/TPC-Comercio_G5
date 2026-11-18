@@ -22,5 +22,7 @@ namespace Dominio
         public decimal PorcentajeGanancia { get; set; }
         public string ImagenUrl { get; set; }
         public bool Activo { get; set; }
+        public string Proveedores { get; set; }
+        public List<Proveedor> ListaProveedores { get; set; }
     }
 }

@@ -57,6 +57,14 @@ VALUES
 ('PROD004', 'Auricular WH', 'Auricular inalambrico Sony', 45000, 60000, 4, 3, 4, 12, 2, 33.33, 'https://ejemplo.com/auricular.jpg', 1),
 ('PROD005', 'Licuadora HR', 'Licuadora Philips 500W', 80000, 104000, 5, 5, 5, 8, 2, 30, 'https://ejemplo.com/licuadora.jpg', 1);
 
+INSERT INTO PRODUCTO_PROVEEDOR (Producto, Proveedor) VALUES
+(1, 1),
+(1, 4),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5);
+
 INSERT INTO COMPRA (Fecha, Proveedor, Usuario, Total) VALUES
 (GETDATE(), 1, 1, 400000),
 (GETDATE(), 2, 2, 300000),

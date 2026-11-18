@@ -23,7 +23,7 @@
             <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
              <asp:BoundField DataField="Marca.Descripcion" HeaderText="Marca" />
             <asp:BoundField DataField="Categoria.Descripcion" HeaderText="Categoria" />
-            <asp:BoundField DataField="Proveedor.RazonSocial" HeaderText="Proveedor" />
+            <asp:BoundField DataField="Proveedores" HeaderText="Proveedores" />
             <asp:BoundField DataField="StockActual" HeaderText="Stock actual" />
             <asp:BoundField DataField="Activo" HeaderText="Activo" />
             <asp:CommandField HeaderText="Editar" ShowSelectButton="true" SelectText="✍" />
