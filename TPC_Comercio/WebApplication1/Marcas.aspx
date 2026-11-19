@@ -11,6 +11,11 @@
             NavigateUrl="FormularioMarca.aspx">Nueva marca</asp:HyperLink>
     </p>
 
+    <div class="mb-3">
+        <asp:Label Text="Filtrar" runat="server" />
+        <asp:TextBox runat="server" ID="txtFiltro" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtFiltro_TextChanged" />
+    </div>
+
     <asp:GridView ID="gvMarcas" runat="server" CssClass="table"
         AutoGenerateColumns="False" DataKeyNames="Id"
         OnSelectedIndexChanged="gvMarcas_SelectedIndexChanged"

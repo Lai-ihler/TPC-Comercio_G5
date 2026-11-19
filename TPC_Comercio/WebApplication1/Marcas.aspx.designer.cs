@@ -24,6 +24,15 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.HyperLink lnkNuevo;
 
         /// <summary>
+        /// txtFiltro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFiltro;
+
+        /// <summary>
         /// gvMarcas control.
         /// </summary>
         /// <remarks>
