@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Dominio;
+using Negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Negocio;
 
 namespace WebApplication1
 {
@@ -15,7 +16,8 @@ namespace WebApplication1
             if (!IsPostBack)
             {
                 CategoriaNegocio negocio = new CategoriaNegocio();
-                gvCategorias.DataSource = negocio.listar();
+                Session.Add("listaCategorias", negocio.listar());
+                gvCategorias.DataSource = Session["listaCategorias"];
                 gvCategorias.DataBind();
             }
         }
@@ -23,6 +25,13 @@ namespace WebApplication1
         {
             string id = gvCategorias.SelectedDataKey.Value.ToString();
             Response.Redirect("FormularioCategoria.aspx?id=" + id);
+        }
+        protected void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+            List<Categoria> lista = (List<Categoria>)Session["listaCategorias"];
+            List<Categoria> listaFiltrada = lista.FindAll(x => x.Descripcion.ToUpper().Contains(txtFiltro.Text.ToUpper()));
+            gvCategorias.DataSource = listaFiltrada;
+            gvCategorias.DataBind();
         }
     }
 }

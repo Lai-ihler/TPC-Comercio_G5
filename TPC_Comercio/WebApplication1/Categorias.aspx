@@ -10,15 +10,23 @@
             NavigateUrl="FormularioCategoria.aspx">Nueva categoría</asp:HyperLink>
     </p>
 
+    <div class="mb-3">
+        <asp:Label Text="Filtrar" runat="server" />
+        <asp:TextBox runat="server" ID="txtFiltro" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtFiltro_TextChanged" />
+    </div>
+
     <asp:GridView ID="gvCategorias" runat="server" CssClass="table"
         AutoGenerateColumns="False" DataKeyNames="Id"
         OnSelectedIndexChanged="gvCategorias_SelectedIndexChanged"
         EmptyDataText="No hay categorías para mostrar.">
+
         <Columns>
             <asp:BoundField DataField="Id" HeaderText="ID" />
             <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />
             <asp:CheckBoxField DataField="Activo" HeaderText="Activo" />
-             <asp:CommandField HeaderText="Editar" ShowSelectButton="true" SelectText="✍" />
+            <asp:CommandField HeaderText="Editar" ShowSelectButton="true" SelectText="✍" />
         </Columns>
+
     </asp:GridView>
+
 </asp:Content>
