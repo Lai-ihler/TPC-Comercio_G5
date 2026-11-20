@@ -25,7 +25,7 @@
         <Columns>
             <asp:BoundField DataField="Id" HeaderText="ID" />
             <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />
-            <asp:BoundField DataField="Activo" HeaderText="Activo" />
+            <asp:CheckBoxField DataField="Activo" HeaderText="Activo" />
             <asp:CommandField HeaderText="Editar" ShowSelectButton="true" SelectText="✍" />
         </Columns>
     </asp:GridView>

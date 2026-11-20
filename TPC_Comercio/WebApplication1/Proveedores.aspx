@@ -28,7 +28,7 @@
                 <asp:BoundField DataField="Email" HeaderText="Email" />
                 <asp:BoundField DataField="Telefono" HeaderText="Telefono" />
                 <asp:BoundField DataField="Direccion" HeaderText="Direccion" />
-                <asp:BoundField DataField="Activo" HeaderText="Activo" />
+                <asp:CheckBoxField DataField="Activo" HeaderText="Activo" />
                 <asp:CommandField HeaderText="Editar" ShowSelectButton="true" SelectText="✍" />
             </columns>
 
