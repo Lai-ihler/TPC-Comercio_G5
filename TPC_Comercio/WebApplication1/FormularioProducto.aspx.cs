@@ -50,8 +50,6 @@ namespace WebApplication1
                     txtCodigo.Text = seleccionado.Codigo;
                     txtNombre.Text = seleccionado.Nombre;
                     txtDescripcion.Text = seleccionado.Descripcion;
-                    txtCosto.Text = seleccionado.Costo.ToString();
-                    txtPrecioVenta.Text = seleccionado.PrecioVenta.ToString();
 
                     ddlMarca.SelectedValue = seleccionado.Marca.Id.ToString();
                     ddlCategoria.SelectedValue = seleccionado.Categoria.Id.ToString();
@@ -85,8 +83,6 @@ namespace WebApplication1
             try
             {
                 /// Validaciones que muestran mensajes de error si los campos no cumplen con los requisitos. Terminan en Producto nuevo = new Producto();
-                lblErrorCosto.Text = "";
-                lblErrorPrecioVenta.Text = "";
                 lblErrorMarca.Text = "";
                 lblErrorCategoria.Text = "";
                 lblErrorProveedor.Text = "";
@@ -125,23 +121,9 @@ namespace WebApplication1
                     return;
                 }
 
-                decimal costo = decimal.Parse(txtCosto.Text);
-                decimal precioVenta = decimal.Parse(txtPrecioVenta.Text);
                 decimal porcentajeGanancia = decimal.Parse(txtPorcentajeGanancia.Text);
                 int stockActual = int.Parse(txtStockActual.Text);
                 int stockMinimo = int.Parse(txtStockMinimo.Text);
-
-                if (costo <= 0)
-                {
-                    lblErrorCosto.Text = "El costo debe ser mayor a cero.";
-                    return;
-                }
-
-                if (precioVenta <= 0)
-                {
-                    lblErrorPrecioVenta.Text = "El precio de venta debe ser mayor a cero.";
-                    return;
-                }
 
                 if (stockActual < 0)
                 {
@@ -167,8 +149,6 @@ namespace WebApplication1
                 nuevo.Codigo = txtCodigo.Text;
                 nuevo.Nombre = txtNombre.Text;
                 nuevo.Descripcion = txtDescripcion.Text;
-                nuevo.Costo = decimal.Parse(txtCosto.Text);
-                nuevo.PrecioVenta = decimal.Parse(txtPrecioVenta.Text);
 
                 nuevo.Marca = new Marca();
                 nuevo.Marca.Id = int.Parse(ddlMarca.SelectedValue);

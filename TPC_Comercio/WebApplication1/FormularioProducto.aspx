@@ -35,23 +35,6 @@
                     <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control"
                         TextMode="MultiLine" Rows="3" Columns="40" MaxLength="200" />
                 </div>
-                <div class="mb-3">
-                    <asp:Label ID="lblCosto" runat="server" CssClass="form-label"
-                        AssociatedControlID="txtCosto" Text="Costo" />
-                    <asp:TextBox ID="txtCosto" runat="server" CssClass="form-control" />
-                    <asp:RequiredFieldValidator runat="server" ControlToValidate="txtCosto" ErrorMessage="El costo es obligatorio." CssClass="text-danger" Display="Dynamic" />
-                    <asp:RegularExpressionValidator runat="server" ControlToValidate="txtCosto" ValidationExpression="^-?[0-9]+(,[0-9]+)?$" ErrorMessage="Ingresa un costo numerico valido." CssClass="text-danger" Display="Dynamic" />
-                    <asp:Label ID="lblErrorCosto" runat="server" CssClass="text-danger" />
-                </div>
-
-                <div class="mb-3">
-                    <asp:Label ID="lblPrecioVenta" runat="server" CssClass="form-label"
-                        AssociatedControlID="txtPrecioVenta" Text="Precio de venta" />
-                    <asp:TextBox ID="txtPrecioVenta" runat="server" CssClass="form-control" />
-                    <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPrecioVenta" ErrorMessage="El precio de venta es obligatorio." CssClass="text-danger" Display="Dynamic" />
-                    <asp:RegularExpressionValidator runat="server" ControlToValidate="txtPrecioVenta" ValidationExpression="^-?[0-9]+(,[0-9]+)?$" ErrorMessage="Ingresa un precio de venta numerico valido." CssClass="text-danger" Display="Dynamic" />
-                    <asp:Label ID="lblErrorPrecioVenta" runat="server" CssClass="text-danger" />
-                </div>
 
             </fieldset>
 

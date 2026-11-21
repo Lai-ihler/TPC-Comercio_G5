@@ -42,5 +42,63 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public void agregar(Compra compra, List<CompraDetalle> detalles)
+        {
+            int idCompra = 0;
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(
+                    "INSERT INTO COMPRA (Fecha, Proveedor, Usuario, Total) " +
+                    "VALUES (@Fecha, @Proveedor, @Usuario, @Total); " +
+                    "SELECT CAST(SCOPE_IDENTITY() AS INT) AS IdCompra"
+                );
+
+                datos.setearParametro("@Fecha", compra.Fecha);
+                datos.setearParametro("@Proveedor", compra.Proveedor.Id);
+                datos.setearParametro("@Usuario", compra.Usuario.Id);
+                datos.setearParametro("@Total", compra.Total);
+
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                    idCompra = (int)datos.Lector["IdCompra"];
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+            foreach (CompraDetalle detalle in detalles)
+            {
+                AccesoDatos datosDetalle = new AccesoDatos();
+
+                try
+                {
+                    datosDetalle.setearConsulta(
+                        "INSERT INTO COMPRA_DETALLE " +
+                        "(Compra, Producto, Cantidad, PrecioUnitario) " +
+                        "VALUES (@Compra, @Producto, @Cantidad, @PrecioUnitario); " +
+                        "UPDATE PRODUCTO " +
+                        "SET Costo = @PrecioUnitario, " +
+                        "PrecioVenta = @PrecioUnitario * (1 + PorcentajeGanancia / 100.0) " +
+                        "WHERE ID = @Producto"
+                    );
+
+                    datosDetalle.setearParametro("@Compra", idCompra);
+                    datosDetalle.setearParametro("@Producto", detalle.Producto.Id);
+                    datosDetalle.setearParametro("@Cantidad", detalle.Cantidad);
+                    datosDetalle.setearParametro("@PrecioUnitario", detalle.PrecioUnitario);
+
+                    datosDetalle.ejecutarAccion();
+                }
+                finally
+                {
+                    datosDetalle.cerrarConexion();
+                }
+            }
+        }
     }
 }

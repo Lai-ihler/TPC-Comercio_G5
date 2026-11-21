@@ -103,7 +103,7 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
-     
+
         }
 
         public string generarCodigo()
@@ -134,6 +134,7 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
         public void agregar(Producto nuevo)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -145,8 +146,10 @@ namespace Negocio
                 datos.setearParametro("@Codigo", nuevo.Codigo);
                 datos.setearParametro("@Nombre", nuevo.Nombre);
                 datos.setearParametro("@Descripcion", nuevo.Descripcion);
-                datos.setearParametro("@Costo", nuevo.Costo);
-                datos.setearParametro("@PrecioVenta", nuevo.PrecioVenta);
+
+                datos.setearParametro("@Costo", 1m); // valor inicial 1 para evitar problemas con el cálculo del precio de venta
+                datos.setearParametro("@PrecioVenta", 1m);  //Modificar DB para que admita 0 o valores nulos
+
                 datos.setearParametro("@Marca", nuevo.Marca.Id);
                 datos.setearParametro("@Categoria", nuevo.Categoria.Id);
                 datos.setearParametro("@Proveedor", nuevo.Proveedor.Id);
@@ -188,13 +191,11 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("UPDATE PRODUCTO SET Codigo = @Codigo, Nombre = @Nombre, Descripcion = @Descripcion, Costo = @Costo, PrecioVenta = @PrecioVenta, Marca = @Marca, Categoria = @Categoria, Proveedor = @Proveedor, StockActual = @StockActual, StockMinimo = @StockMinimo, PorcentajeGanancia = @PorcentajeGanancia, ImagenUrl = @ImagenUrl WHERE ID = @Id");
+                datos.setearConsulta("UPDATE PRODUCTO SET Codigo = @Codigo, Nombre = @Nombre, Descripcion = @Descripcion, Marca = @Marca, Categoria = @Categoria, Proveedor = @Proveedor, StockActual = @StockActual, StockMinimo = @StockMinimo, PorcentajeGanancia = @PorcentajeGanancia, ImagenUrl = @ImagenUrl WHERE ID = @Id");
 
                 datos.setearParametro("@Codigo", producto.Codigo);
                 datos.setearParametro("@Nombre", producto.Nombre);
                 datos.setearParametro("@Descripcion", producto.Descripcion);
-                datos.setearParametro("@Costo", producto.Costo);
-                datos.setearParametro("@PrecioVenta", producto.PrecioVenta);
                 datos.setearParametro("@Marca", producto.Marca.Id);
                 datos.setearParametro("@Categoria", producto.Categoria.Id);
                 datos.setearParametro("@Proveedor", producto.Proveedor.Id);
@@ -215,7 +216,7 @@ namespace Negocio
 
         }
 
-        public void eliminarLogico(int id,bool activo=false)
+        public void eliminarLogico(int id, bool activo = false)
         {
             AccesoDatos datos = new AccesoDatos();
 
