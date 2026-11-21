@@ -12,6 +12,12 @@
 
     <p>Listado de productos del comercio.</p>
 
+    <asp:Label ID="lblFiltro" runat="server" Text="Filtrar productos" />
+    <asp:TextBox ID="txtFiltro" runat="server"
+        CssClass="form-control mb-3"
+        AutoPostBack="true"
+        OnTextChanged="txtFiltro_TextChanged" />
+
     <asp:GridView ID="gvListado" runat="server" CssClass="table"
         AutoGenerateColumns="False"
         DataKeyNames="Id"
@@ -25,7 +31,7 @@
             <asp:BoundField DataField="Categoria.Descripcion" HeaderText="Categoria" />
             <asp:BoundField DataField="Proveedores" HeaderText="Proveedores" />
             <asp:BoundField DataField="StockActual" HeaderText="Stock actual" />
-            <asp:BoundField DataField="Activo" HeaderText="Activo" />
+            <asp:Checkboxfield DataField="Activo" HeaderText="Activo" />
             <asp:CommandField HeaderText="Editar" ShowSelectButton="true" SelectText="✍" />
         </Columns>
     </asp:GridView>

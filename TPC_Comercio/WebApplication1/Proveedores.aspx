@@ -13,6 +13,13 @@
             Nuevo Proveedor
         </asp:HyperLink>
 
+        <asp:Label ID="lblFiltro" runat="server" Text="Filtrar proveedores" />
+
+        <asp:TextBox ID="txtFiltro" runat="server"
+            CssClass="form-control mb-3"
+            AutoPostBack="true"
+            OnTextChanged="txtFiltro_TextChanged" />
+
         <asp:GridView
             ID="gvProveedores"
             runat="server"
