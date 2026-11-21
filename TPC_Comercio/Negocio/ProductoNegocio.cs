@@ -270,5 +270,33 @@ namespace Negocio
                 }
             }
         }
+        public Producto buscar(int id)
+        {
+            Producto aux = null;
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("SELECT * FROM PRODUCTO WHERE ID = @id");
+                datos.setearParametro("@id", id);
+
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    aux = new Producto();
+
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.PrecioVenta = (decimal)datos.Lector["PrecioVenta"];
+                }
+
+                return aux;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

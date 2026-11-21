@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="FormularioVenta.aspx.cs" Inherits="WebApplication1.FormularioVenta" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -37,7 +38,7 @@
                 </div>
 
                 <asp:Button ID="btnAgregar" runat="server"
-                    Text="Agregar producto" CssClass="btn btn-secondary" />
+                    Text="Agregar producto" CssClass="btn btn-secondary" OnClick="btnAgregar_Click"/>
             </fieldset>
 
             <fieldset class="mb-4">
@@ -49,10 +50,14 @@
                     ShowHeaderWhenEmpty="True"
                     EmptyDataText="Todavia no hay productos agregados.">
                     <Columns>
-                        <asp:BoundField DataField="Producto" HeaderText="Producto" />
+                        <asp:TemplateField HeaderText="Producto">
+                            <ItemTemplate>
+                                <%# Eval("Producto.Nombre") %>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                         <asp:BoundField DataField="Cantidad" HeaderText="Cantidad" />
-                        <asp:BoundField DataField="Precio" HeaderText="Precio unitario" />
-                        <asp:BoundField DataField="Subtotal" HeaderText="Subtotal" />
+                        <asp:BoundField DataField="PrecioUnitario" HeaderText="Precio unitario" DataFormatString="{0:C}" />
+                        <asp:BoundField DataField="Subtotal" HeaderText="Subtotal" DataFormatString="{0:C}" />
                     </Columns>
                 </asp:GridView>
 
