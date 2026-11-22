@@ -83,6 +83,7 @@ namespace Negocio
                         "VALUES (@Compra, @Producto, @Cantidad, @PrecioUnitario); " +
                         "UPDATE PRODUCTO " +
                         "SET Costo = @PrecioUnitario, " +
+                        "SET StockActual = StockActual + @Cantidad, " +
                         "PrecioVenta = @PrecioUnitario * (1 + PorcentajeGanancia / 100.0) " +
                         "WHERE ID = @Producto"
                     );

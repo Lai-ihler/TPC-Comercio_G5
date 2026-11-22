@@ -141,7 +141,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("INSERT INTO PRODUCTO (Codigo, Nombre, Descripcion, Costo, PrecioVenta, Marca, Categoria, Proveedor, StockActual, StockMinimo, PorcentajeGanancia, ImagenUrl, Activo) VALUES (@Codigo, @Nombre, @Descripcion, @Costo, @PrecioVenta, @Marca, @Categoria, @Proveedor, @StockActual, @StockMinimo, @PorcentajeGanancia, @ImagenUrl, @Activo)");
+                datos.setearConsulta("INSERT INTO PRODUCTO (Codigo, Nombre, Descripcion, Costo, PrecioVenta, Marca, Categoria, Proveedor, StockActual, StockMinimo, PorcentajeGanancia, ImagenUrl, Activo) VALUES (@Codigo, @Nombre, @Descripcion, @Costo, @PrecioVenta, @Marca, @Categoria, @Proveedor, 0, @StockMinimo, @PorcentajeGanancia, @ImagenUrl, @Activo)");
 
                 datos.setearParametro("@Codigo", nuevo.Codigo);
                 datos.setearParametro("@Nombre", nuevo.Nombre);
@@ -153,7 +153,6 @@ namespace Negocio
                 datos.setearParametro("@Marca", nuevo.Marca.Id);
                 datos.setearParametro("@Categoria", nuevo.Categoria.Id);
                 datos.setearParametro("@Proveedor", nuevo.Proveedor.Id);
-                datos.setearParametro("@StockActual", nuevo.StockActual);
                 datos.setearParametro("@StockMinimo", nuevo.StockMinimo);
                 datos.setearParametro("@PorcentajeGanancia", nuevo.PorcentajeGanancia);
                 datos.setearParametro("@ImagenUrl", nuevo.ImagenUrl);
@@ -191,7 +190,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("UPDATE PRODUCTO SET Codigo = @Codigo, Nombre = @Nombre, Descripcion = @Descripcion, Marca = @Marca, Categoria = @Categoria, Proveedor = @Proveedor, StockActual = @StockActual, StockMinimo = @StockMinimo, PorcentajeGanancia = @PorcentajeGanancia, ImagenUrl = @ImagenUrl WHERE ID = @Id");
+                datos.setearConsulta("UPDATE PRODUCTO SET Codigo = @Codigo, Nombre = @Nombre, Descripcion = @Descripcion, Marca = @Marca, Categoria = @Categoria, Proveedor = @Proveedor, StockMinimo = @StockMinimo, PorcentajeGanancia = @PorcentajeGanancia, ImagenUrl = @ImagenUrl WHERE ID = @Id");
 
                 datos.setearParametro("@Codigo", producto.Codigo);
                 datos.setearParametro("@Nombre", producto.Nombre);
@@ -199,7 +198,6 @@ namespace Negocio
                 datos.setearParametro("@Marca", producto.Marca.Id);
                 datos.setearParametro("@Categoria", producto.Categoria.Id);
                 datos.setearParametro("@Proveedor", producto.Proveedor.Id);
-                datos.setearParametro("@StockActual", producto.StockActual);
                 datos.setearParametro("@StockMinimo", producto.StockMinimo);
                 datos.setearParametro("@PorcentajeGanancia", producto.PorcentajeGanancia);
                 datos.setearParametro("@ImagenUrl", producto.ImagenUrl);

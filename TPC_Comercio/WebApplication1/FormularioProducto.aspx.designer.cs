@@ -150,42 +150,6 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Label lblErrorProveedor;
 
         /// <summary>
-        /// Control lblStockActual.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStockActual;
-
-        /// <summary>
-        /// Control txtStockActual.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtStockActual;
-
-        /// <summary>
-        /// Control lblErrorStockActual.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorStockActual;
-
-        /// <summary>
-        /// Control chkConfirmarStockBajo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkConfirmarStockBajo;
-
-        /// <summary>
         /// Control lblStockMinimo.
         /// </summary>
         /// <remarks>

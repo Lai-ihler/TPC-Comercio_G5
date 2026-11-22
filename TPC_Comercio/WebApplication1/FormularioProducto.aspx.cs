@@ -61,7 +61,6 @@ namespace WebApplication1
                         );
                     }
 
-                    txtStockActual.Text = seleccionado.StockActual.ToString();
                     txtStockMinimo.Text = seleccionado.StockMinimo.ToString();
                     txtPorcentajeGanancia.Text = seleccionado.PorcentajeGanancia.ToString();
                     txtImagenUrl.Text = seleccionado.ImagenUrl;
@@ -86,7 +85,6 @@ namespace WebApplication1
                 lblErrorMarca.Text = "";
                 lblErrorCategoria.Text = "";
                 lblErrorProveedor.Text = "";
-                lblErrorStockActual.Text = "";
                 lblErrorStockMinimo.Text = "";
 
                 Page.Validate();
