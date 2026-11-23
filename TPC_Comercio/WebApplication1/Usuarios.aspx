@@ -7,11 +7,25 @@
         <h1>Usuarios</h1>
         <p>Listado de usuarios del comercio</p>
 
-        <asp:HyperLink ID="lnkNuevo" runat="server"
-            NavigateUrl="FormularioUsuario.aspx"
-            CssClass="btn btn-primary">
-            Nuevo Usuario
-        </asp:HyperLink>
+        <div class="mb-3">
+            <asp:HyperLink ID="lnkNuevo" runat="server"
+                NavigateUrl="FormularioUsuario.aspx"
+                CssClass="btn btn-primary">
+                Nuevo Usuario
+            </asp:HyperLink>
+        </div>
+
+        <div class="mb-3">
+            <asp:Label ID="lblFiltro" runat="server"
+                AssociatedControlID="txtFiltro"
+                CssClass="form-label"
+                Text="Filtrar usuarios" />
+
+            <asp:TextBox ID="txtFiltro" runat="server"
+                CssClass="form-control"
+                AutoPostBack="true"
+                OnTextChanged="txtFiltro_TextChanged" />
+        </div>
 
         <asp:GridView
             ID="gvUsuarios"

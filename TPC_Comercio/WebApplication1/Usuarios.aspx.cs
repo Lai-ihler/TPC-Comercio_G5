@@ -1,5 +1,6 @@
 ﻿using Negocio;
 using System;
+using Dominio;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,8 +16,8 @@ namespace WebApplication1
             if (!IsPostBack)
             {
                 UsuarioNegocio un = new UsuarioNegocio();
-
-                gvUsuarios.DataSource = un.listar();
+                Session["listaUsuarios"] = un.listar();
+                gvUsuarios.DataSource = Session["listaUsuarios"];
                 gvUsuarios.DataBind();
             }
         }
@@ -37,6 +38,22 @@ namespace WebApplication1
                     e.Row.BackColor = System.Drawing.Color.LightGray;
                 }
             }
+        }
+
+        protected void txtFiltro_TextChanged(object sender, EventArgs e)
+        {
+            List<Usuario> lista = (List<Usuario>)Session["listaUsuarios"];
+            string filtro = txtFiltro.Text.ToUpper();
+
+            List<Usuario> listaFiltrada = lista.FindAll(x =>
+                x.NombreUsuario.ToUpper().Contains(filtro) ||
+                x.Nombre.ToUpper().Contains(filtro) ||
+                x.Apellido.ToUpper().Contains(filtro) ||
+                x.Email.ToUpper().Contains(filtro)
+            );
+
+            gvUsuarios.DataSource = listaFiltrada;
+            gvUsuarios.DataBind();
         }
     }
 }
