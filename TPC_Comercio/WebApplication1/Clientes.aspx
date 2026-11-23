@@ -6,11 +6,24 @@
         <h1>Clientes</h1>
         <p>Listado de clientes del comercio</p>
 
-        <asp:HyperLink ID="lnkNuevo" runat="server"
-            NavigateUrl="FormularioCliente.aspx"
-            CssClass="btn btn-primary mb-3">
-            Nuevo cliente
-        </asp:HyperLink>
+        <div class="mb-3">
+            <asp:HyperLink ID="lnkNuevo" runat="server"
+                NavigateUrl="FormularioCliente.aspx"
+                CssClass="btn btn-primary mb-3">
+                Nuevo cliente
+            </asp:HyperLink>
+        </div>
+
+         <div class="mb-3">
+            <asp:Label ID="lblFiltro" runat="server"
+                AssociatedControlID="txtFiltro"
+                Text="Filtrar clientes" />
+
+            <asp:TextBox ID="txtFiltro" runat="server"
+                CssClass="form-control mb-3"
+                AutoPostBack="true"
+                OnTextChanged="txtFiltro_TextChanged" />
+        </div>
     
         <asp:GridView
             ID="gvClientes"
