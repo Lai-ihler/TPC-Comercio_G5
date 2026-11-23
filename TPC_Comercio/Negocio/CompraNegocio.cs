@@ -81,12 +81,8 @@ namespace Negocio
                         "INSERT INTO COMPRA_DETALLE " +
                         "(Compra, Producto, Cantidad, PrecioUnitario) " +
                         "VALUES (@Compra, @Producto, @Cantidad, @PrecioUnitario); " +
-                        "UPDATE PRODUCTO " +
-                        "SET Costo = @PrecioUnitario, " +
-                        "SET StockActual = StockActual + @Cantidad, " +
-                        "PrecioVenta = @PrecioUnitario * (1 + PorcentajeGanancia / 100.0) " +
-                        "WHERE ID = @Producto"
-                    );
+                        "UPDATE PRODUCTO SET Costo = @PrecioUnitario, StockActual = StockActual + @Cantidad, " +
+                        "PrecioVenta = @PrecioUnitario * (1 + PorcentajeGanancia / 100.0) WHERE ID = @Producto");
 
                     datosDetalle.setearParametro("@Compra", idCompra);
                     datosDetalle.setearParametro("@Producto", detalle.Producto.Id);
