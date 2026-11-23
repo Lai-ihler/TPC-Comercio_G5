@@ -135,5 +135,33 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public bool Login(Usuario usuario)
+       {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta(SELECT_BASE + " WHERE U.NombreUsuario = @NombreUsuario AND U.Pass = @Pass AND U.Activo = 1");
+                datos.setearParametro("@NombreUsuario", usuario.NombreUsuario);
+                datos.setearParametro("@Pass", usuario.Pass);
+                datos.ejecutarLectura();
+                if (datos.Lector.Read())
+                {
+                    usuario.Id = (int) datos.Lector["ID"];
+                   usuario.Nombre = (string) datos.Lector["Nombre"];
+                    usuario.Apellido = (string) datos.Lector["Apellido"];
+                    usuario.Email = (string) datos.Lector["Email"];
+                    usuario.Perfil = new Perfil();
+                    usuario.Perfil.Id = (int) datos.Lector["IDPERFIL"];
+                    usuario.Perfil.Descripcion = (string) datos.Lector["PERFIL"];
+                    usuario.Activo = true;
+                    return true;
+                }
+                return false;
+            }
+            finally
+            {
+    datos.cerrarConexion();
+                }
+        }
     }
 }
