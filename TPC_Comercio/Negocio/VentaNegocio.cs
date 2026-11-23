@@ -46,6 +46,35 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
+
+        }
+        public string generarNumeroFactura()
+        {
+            int ultimoNumero = 0;
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("SELECT NumeroFactura FROM VENTA WHERE NumeroFactura LIKE 'FAC-%'");
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    string factura = (string)datos.Lector["NumeroFactura"];
+                    int numero = int.Parse(factura.Substring(4));
+
+                    if (numero > ultimoNumero)
+                        ultimoNumero = numero;
+                }
+
+                return "FAC-" + (ultimoNumero + 1).ToString("D4");
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
     }
 }
+
+
