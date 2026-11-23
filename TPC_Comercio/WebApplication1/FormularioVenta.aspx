@@ -64,6 +64,7 @@
                 <p class="text-end">
                     <strong>Total:</strong>
                     <asp:Label ID="lblTotal" runat="server" Text="$0" />
+                    <asp:Label ID="lblMensaje" runat="server" CssClass="text-danger" />
                 </p>
             </fieldset>
 

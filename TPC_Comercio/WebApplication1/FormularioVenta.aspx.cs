@@ -12,7 +12,7 @@ namespace WebApplication1
 {
     public partial class FormularioVenta : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        public void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
@@ -35,32 +35,63 @@ namespace WebApplication1
             }
 
         }
-        protected void btnAgregar_Click(object sender, EventArgs e)
+        public void btnAgregar_Click(object sender, EventArgs e)
         {
-            List<VentaDetalle> detalle = (List<VentaDetalle>)Session["DetalleVenta"];
+            lblMensaje.Text = "";
+
+            if (string.IsNullOrEmpty(ddlProducto.SelectedValue))
+            {
+                lblMensaje.Text = "Seleccioná un producto.";
+                return;
+            }
+
+            int cantidad;
+            if (!int.TryParse(txtCantidad.Text, out cantidad) || cantidad <= 0)
+            {
+                lblMensaje.Text = "Ingresá una cantidad mayor a cero.";
+                return;
+            }
 
             int idProducto = int.Parse(ddlProducto.SelectedValue);
-            int cantidad = int.Parse(txtCantidad.Text);
 
             ProductoNegocio negocio = new ProductoNegocio();
             Producto producto = negocio.buscar(idProducto);
-            if (producto == null)
-                return;
-            
-            VentaDetalle nuevo = new VentaDetalle();
 
+            if (producto == null)
+            {
+                lblMensaje.Text = "No se encontró el producto.";
+                return;
+            }
+
+            List<VentaDetalle> detalle =
+                (List<VentaDetalle>)Session["DetalleVenta"];
+
+            int cantidadYaAgregada = detalle
+                .Where(x => x.Producto.Id == idProducto)
+                .Sum(x => x.Cantidad);
+
+            if (cantidad + cantidadYaAgregada > producto.StockActual)
+            {
+                lblMensaje.Text = "No hay stock suficiente para esa cantidad.";
+                return;
+            }
+
+            VentaDetalle nuevo = new VentaDetalle();
             nuevo.Producto = producto;
             nuevo.Cantidad = cantidad;
             nuevo.PrecioUnitario = producto.PrecioVenta;
             nuevo.Subtotal = producto.PrecioVenta * cantidad;
+
             detalle.Add(nuevo);
 
             gvDetalle.DataSource = detalle;
             gvDetalle.DataBind();
-            decimal total = detalle.Sum(x => x.Subtotal);
 
+            decimal total = detalle.Sum(x => x.Subtotal);
             lblTotal.Text = total.ToString("C");
+
             Session["DetalleVenta"] = detalle;
+            txtCantidad.Text = "";
         }
     }
 }

@@ -287,6 +287,7 @@ namespace Negocio
                     aux.Id = (int)datos.Lector["Id"];
                     aux.Nombre = (string)datos.Lector["Nombre"];
                     aux.PrecioVenta = (decimal)datos.Lector["PrecioVenta"];
+                    aux.StockActual = (int)datos.Lector["StockActual"];
                 }
 
                 return aux;

@@ -120,25 +120,11 @@ namespace WebApplication1
                 }
 
                 decimal porcentajeGanancia = decimal.Parse(txtPorcentajeGanancia.Text);
-                int stockActual = int.Parse(txtStockActual.Text);
                 int stockMinimo = int.Parse(txtStockMinimo.Text);
-
-                if (stockActual < 0)
-                {
-                    lblErrorStockActual.Text = "El stock actual no puede ser negativo.";
-                    return; 
-                }
 
                 if (stockMinimo <= 0)
                 {
                     lblErrorStockMinimo.Text = "El stock minimo debe ser mayor a cero.";
-                    return;
-                }
-
-                if (stockActual < stockMinimo && !chkConfirmarStockBajo.Checked)
-                {
-                    lblErrorStockActual.Text =
-                        "El stock actual es menor al minimo. Marca la casilla si deseas continuar.";
                     return;
                 }
 
@@ -169,7 +155,6 @@ namespace WebApplication1
 
                 nuevo.Proveedor = nuevo.ListaProveedores[0];
 
-                nuevo.StockActual = int.Parse(txtStockActual.Text);
                 nuevo.StockMinimo = int.Parse(txtStockMinimo.Text);
                 nuevo.PorcentajeGanancia = porcentajeGanancia;
                 nuevo.ImagenUrl = txtImagenUrl.Text;
