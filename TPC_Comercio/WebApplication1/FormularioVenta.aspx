@@ -69,7 +69,7 @@
             </fieldset>
 
             <asp:Button ID="btnConfirmar" runat="server"
-                Text="Confirmar venta" CssClass="btn btn-primary" />
+                Text="Confirmar venta" CssClass="btn btn-primary" OnClick="btnConfirmar_Click" />
 
             <asp:HyperLink ID="lnkCancelar" runat="server"
                 NavigateUrl="Ventas.aspx" CssClass="btn btn-outline-secondary">

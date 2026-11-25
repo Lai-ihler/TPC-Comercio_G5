@@ -74,6 +74,74 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public void agregar(Venta venta, List<VentaDetalle> detalles)
+        {
+            int idVenta = 0;
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(
+                    "INSERT INTO VENTA (NumeroFactura, Fecha, Cliente, Usuario, Total) " +
+                    "VALUES ('PENDIENTE', @Fecha, @Cliente, @Usuario, @Total); " +
+                    "SELECT CAST(SCOPE_IDENTITY() AS INT) AS IdVenta"
+                );
+
+                datos.setearParametro("@Fecha", venta.Fecha);
+                datos.setearParametro("@Cliente", venta.Cliente.Id);
+                datos.setearParametro("@Usuario", venta.Usuario.Id);
+                datos.setearParametro("@Total", venta.Total);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                    idVenta = (int)datos.Lector["IdVenta"];
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+            venta.Id = idVenta;
+            venta.NumeroFactura = "FAC-" + idVenta.ToString("D4");
+
+            AccesoDatos datosFactura = new AccesoDatos();
+
+            try
+            {
+                datosFactura.setearConsulta("UPDATE VENTA SET NumeroFactura = @NumeroFactura WHERE ID = @Id");
+                datosFactura.setearParametro("@NumeroFactura", venta.NumeroFactura);
+                datosFactura.setearParametro("@Id", idVenta);
+                datosFactura.ejecutarAccion();
+            }
+            finally
+            {
+                datosFactura.cerrarConexion();
+            }
+
+            foreach (VentaDetalle detalle in detalles)
+            {
+                AccesoDatos datosDetalle = new AccesoDatos();
+
+                try
+                {
+                    datosDetalle.setearConsulta(
+                        "INSERT INTO VENTA_DETALLE (Venta, Producto, Cantidad, PrecioUnitario) " +
+                        "VALUES (@Venta, @Producto, @Cantidad, @PrecioUnitario); " +
+                        "UPDATE PRODUCTO SET StockActual = StockActual - @Cantidad WHERE ID = @Producto"
+                    );
+
+                    datosDetalle.setearParametro("@Venta", idVenta);
+                    datosDetalle.setearParametro("@Producto", detalle.Producto.Id);
+                    datosDetalle.setearParametro("@Cantidad", detalle.Cantidad);
+                    datosDetalle.setearParametro("@PrecioUnitario", detalle.PrecioUnitario);
+                    datosDetalle.ejecutarAccion();
+                }
+                finally
+                {
+                    datosDetalle.cerrarConexion();
+                }
+            }
+        }
     }
 }
 

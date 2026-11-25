@@ -93,5 +93,60 @@ namespace WebApplication1
             Session["DetalleVenta"] = detalle;
             txtCantidad.Text = "";
         }
+        public void btnConfirmar_Click(object sender, EventArgs e)
+        {
+            lblMensaje.Text = "";
+
+            try
+            { 
+            
+                if (string.IsNullOrEmpty(ddlCliente.SelectedValue))
+                {
+                    lblMensaje.Text = "Seleccioná un cliente.";
+                    return;
+                }
+
+                List<VentaDetalle> detalles =
+                    (List<VentaDetalle>)Session["DetalleVenta"];
+                if (detalles == null || detalles.Count == 0)
+                {
+                    lblMensaje.Text = "Agregá al menos un producto.";
+                    return;
+                }
+
+                Usuario usuario = (Usuario)Session["usuario"];
+                if (usuario == null || usuario.Id <= 0)
+                {
+                    lblMensaje.Text = "No se encontró un usuario válido.";
+                    return;
+                }
+
+                Venta nuevaVenta = new Venta();
+                nuevaVenta.Fecha = DateTime.Now;
+
+                nuevaVenta.Cliente = new Cliente();
+                nuevaVenta.Cliente.Id = int.Parse(ddlCliente.SelectedValue);
+
+                nuevaVenta.Usuario = usuario;
+
+                nuevaVenta.Total = detalles.Sum(x => x.Subtotal);
+                VentaNegocio negocio = new VentaNegocio();
+                negocio.agregar(nuevaVenta, detalles);
+
+                Session["DetalleVenta"] = new List<VentaDetalle>();
+                gvDetalle.DataSource = null;
+                gvDetalle.DataBind();
+                lblTotal.Text = "$0";
+                txtCantidad.Text = "";
+
+                lblMensaje.CssClass = "text-success";
+                lblMensaje.Text = "Venta registrada correctamente.";
+            }
+            catch (Exception ex)
+            {
+                lblMensaje.CssClass = "text-danger";
+                lblMensaje.Text = "Error al registrar la venta: " + ex.Message;
+            }
+        }
     }
 }
