@@ -142,6 +142,50 @@ namespace Negocio
                 }
             }
         }
+        public List<VentaDetalle> listarDetalles(int idVenta)
+        {
+            List<VentaDetalle> lista = new List<VentaDetalle>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(
+                    "SELECT VD.ID, VD.Venta, VD.Producto, P.Nombre, " +
+                    "VD.Cantidad, VD.PrecioUnitario " +
+                    "FROM VENTA_DETALLE VD " +
+                    "INNER JOIN PRODUCTO P ON P.ID = VD.Producto " +
+                    "WHERE VD.Venta = @IdVenta"
+                );
+
+                datos.setearParametro("@IdVenta", idVenta);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    VentaDetalle detalle = new VentaDetalle();
+
+                    detalle.Id = (int)datos.Lector["ID"];
+                    detalle.Cantidad = (int)datos.Lector["Cantidad"];
+                    detalle.PrecioUnitario = (decimal)datos.Lector["PrecioUnitario"];
+                    detalle.Subtotal = detalle.Cantidad * detalle.PrecioUnitario;
+
+                    detalle.Producto = new Producto();
+                    detalle.Producto.Id = (int)datos.Lector["Producto"];
+                    detalle.Producto.Nombre = (string)datos.Lector["Nombre"];
+
+                    detalle.Venta = new Venta();
+                    detalle.Venta.Id = (int)datos.Lector["Venta"];
+
+                    lista.Add(detalle);
+                }
+
+                return lista;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
 

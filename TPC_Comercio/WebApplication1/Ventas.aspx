@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Ventas.aspx.cs" Inherits="WebApplication1.Ventas" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -30,6 +31,16 @@
             </asp:TemplateField>
 
             <asp:BoundField DataField="Total" HeaderText="Total" />
+
+            <asp:TemplateField HeaderText="Detalle">
+                <ItemTemplate>
+                    <asp:HyperLink ID="lnkDetalle" runat="server"
+                        Text="Ver"
+                        CssClass="btn btn-sm"
+                        NavigateUrl='<%# "DetalleVenta.aspx?id=" + Eval("Id") %>' />
+                </ItemTemplate>
+            </asp:TemplateField>
+
         </Columns>
     </asp:GridView>
 </asp:Content>
