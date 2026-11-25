@@ -33,7 +33,7 @@ namespace WebApplication1
                     return;
                 }
 
-                lblFactura.Text = "Factura: FAC-" + idVenta.ToString("D4");
+                lblFactura.Text = "Factura: " + detalles[0].Venta.NumeroFactura;
 
                 gvDetalle.DataSource = detalles;
                 gvDetalle.DataBind();

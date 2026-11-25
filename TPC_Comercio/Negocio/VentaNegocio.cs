@@ -77,16 +77,18 @@ namespace Negocio
         public void agregar(Venta venta, List<VentaDetalle> detalles)
         {
             int idVenta = 0;
+            venta.NumeroFactura = generarNumeroFactura();
             AccesoDatos datos = new AccesoDatos();
 
             try
             {
                 datos.setearConsulta(
                     "INSERT INTO VENTA (NumeroFactura, Fecha, Cliente, Usuario, Total) " +
-                    "VALUES ('PENDIENTE', @Fecha, @Cliente, @Usuario, @Total); " +
+                    "VALUES (@NumeroFactura, @Fecha, @Cliente, @Usuario, @Total); " +
                     "SELECT CAST(SCOPE_IDENTITY() AS INT) AS IdVenta"
                 );
 
+                datos.setearParametro("@NumeroFactura", venta.NumeroFactura);
                 datos.setearParametro("@Fecha", venta.Fecha);
                 datos.setearParametro("@Cliente", venta.Cliente.Id);
                 datos.setearParametro("@Usuario", venta.Usuario.Id);
@@ -102,21 +104,7 @@ namespace Negocio
             }
 
             venta.Id = idVenta;
-            venta.NumeroFactura = "FAC-" + idVenta.ToString("D4");
 
-            AccesoDatos datosFactura = new AccesoDatos();
-
-            try
-            {
-                datosFactura.setearConsulta("UPDATE VENTA SET NumeroFactura = @NumeroFactura WHERE ID = @Id");
-                datosFactura.setearParametro("@NumeroFactura", venta.NumeroFactura);
-                datosFactura.setearParametro("@Id", idVenta);
-                datosFactura.ejecutarAccion();
-            }
-            finally
-            {
-                datosFactura.cerrarConexion();
-            }
 
             foreach (VentaDetalle detalle in detalles)
             {
@@ -150,10 +138,11 @@ namespace Negocio
             try
             {
                 datos.setearConsulta(
-                    "SELECT VD.ID, VD.Venta, VD.Producto, P.Nombre, " +
+                    "SELECT VD.ID, VD.Venta, V.NumeroFactura, VD.Producto, P.Nombre, " +
                     "VD.Cantidad, VD.PrecioUnitario " +
                     "FROM VENTA_DETALLE VD " +
                     "INNER JOIN PRODUCTO P ON P.ID = VD.Producto " +
+                      "INNER JOIN VENTA V ON V.ID = VD.Venta " +
                     "WHERE VD.Venta = @IdVenta"
                 );
 
@@ -175,7 +164,7 @@ namespace Negocio
 
                     detalle.Venta = new Venta();
                     detalle.Venta.Id = (int)datos.Lector["Venta"];
-
+                    detalle.Venta.NumeroFactura = (string)datos.Lector["NumeroFactura"];
                     lista.Add(detalle);
                 }
 
