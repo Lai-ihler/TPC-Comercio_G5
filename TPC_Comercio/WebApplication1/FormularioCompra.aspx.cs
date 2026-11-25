@@ -116,5 +116,64 @@ namespace WebApplication1
             txtCantidad.Text = "";
             txtPrecio.Text = "";
         }
+
+        protected void btnConfirmar_Click(object sender, EventArgs e)
+        {
+            lblMensaje.Text = "";
+            lblMensaje.CssClass = "text-danger";
+
+            try
+            {
+                if (string.IsNullOrEmpty(ddlProveedor.SelectedValue))
+                {
+                    lblMensaje.Text = "Seleccioná un proveedor.";
+                    return;
+                }
+
+                List<CompraDetalle> detalles =
+                    (List<CompraDetalle>)Session["DetalleCompra"];
+
+                if (detalles == null || detalles.Count == 0)
+                {
+                    lblMensaje.Text = "Agregá al menos un producto a la compra.";
+                    return;
+                }
+
+                Usuario usuario = (Usuario)Session["usuario"];
+
+                if (usuario == null || usuario.Id <= 0)
+                {
+                    lblMensaje.Text = "No se encontró un usuario válido.";
+                    return;
+                }
+
+                Compra nuevaCompra = new Compra();
+                nuevaCompra.Fecha = DateTime.Now;
+
+                nuevaCompra.Proveedor = new Proveedor();
+                nuevaCompra.Proveedor.Id = int.Parse(ddlProveedor.SelectedValue);
+
+                nuevaCompra.Usuario = usuario;
+                nuevaCompra.Total = detalles.Sum(x => x.Subtotal);
+
+                CompraNegocio negocio = new CompraNegocio();
+                negocio.agregar(nuevaCompra, detalles);
+
+                Session["DetalleCompra"] = new List<CompraDetalle>();
+                gvDetalle.DataSource = null;
+                gvDetalle.DataBind();
+                lblTotal.Text = "$0";
+                txtCantidad.Text = "";
+                txtPrecio.Text = "";
+
+                lblMensaje.CssClass = "text-success";
+                lblMensaje.Text = "Compra registrada correctamente.";
+            }
+            catch (Exception ex)
+            {
+                lblMensaje.CssClass = "text-danger";
+                lblMensaje.Text = "Error al registrar la compra: " + ex.Message;
+            }
+        }
     }
 }
