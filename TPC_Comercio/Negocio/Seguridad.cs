@@ -11,7 +11,7 @@ namespace Negocio
 {
     public static class Seguridad
     {
-        public static bool LoginActivo = false;
+        public static bool LoginActivo = true;
 
         public static bool sesionActiva(object user)
         {

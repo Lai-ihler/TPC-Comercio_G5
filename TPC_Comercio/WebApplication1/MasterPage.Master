@@ -47,6 +47,14 @@
 
                             <li class="nav-item"><a class="nav-link" href="Ventas.aspx">Ventas</a></li>
                         </ul>
+                        <div class="d-flex">
+                            <% if (!Negocio.Seguridad.sesionActiva(Session["usuario"])) { %>
+                                <a href="Login.aspx" class="btn btn-outline-light">Ingresar</a>
+                            <% } else { %>
+                                <asp:Label ID="lblUsuario" runat="server" CssClass="text-light me-2 align-self-center" />
+                                <asp:Button Text="Salir" ID="btnSalir" CssClass="btn btn-outline-light" OnClick="btnSalir_Click" CausesValidation="false" runat="server" />
+                            <% } %>
+                        </div>
                     </div>
                 </div>
             </nav>
