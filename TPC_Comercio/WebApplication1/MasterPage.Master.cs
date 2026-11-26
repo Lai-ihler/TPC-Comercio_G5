@@ -24,11 +24,19 @@ namespace WebApplication1
                 Usuario usuario = (Usuario)Session["usuario"];
                 lblUsuario.Text = usuario.NombreUsuario;
             }
+            if (Seguridad.LoginActivo && Seguridad.sesionActiva(Session["usuario"]) && !Seguridad.esAdmin(Session["usuario"]))
+            {
+                if (!(Page is Default || Page is Login || Page is Error || Page is Clientes || Page is FormularioCliente || Page is Ventas || Page is FormularioVenta || Page is DetalleVenta))
+                {
+                    Session.Add("error", "No tenés permisos para ingresar a esta pantalla. Se requiere perfil Administrador.");
+                    Response.Redirect("Error.aspx", false);
+                }
+            }
         }
         protected void btnSalir_Click(object sender, EventArgs e)
-		{
-			Session.Clear();
-			Response.Redirect("Login.aspx", false);
-		}
-}
+        {
+            Session.Clear();
+            Response.Redirect("Login.aspx", false);
+        }
+    }
 }
