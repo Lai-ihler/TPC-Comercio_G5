@@ -96,6 +96,7 @@ namespace WebApplication1
         public void btnConfirmar_Click(object sender, EventArgs e)
         {
             lblMensaje.Text = "";
+            lblMensaje.CssClass = "text-danger";
 
             try
             { 

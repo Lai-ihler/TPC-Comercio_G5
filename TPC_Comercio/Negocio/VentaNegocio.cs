@@ -175,6 +175,47 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public Venta buscar(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(
+                    "SELECT V.ID, V.NumeroFactura, V.Fecha, V.Total, " +
+                    "C.ID AS ClienteId, C.Nombre, C.Apellido " +
+                    "FROM VENTA V " +
+                    "INNER JOIN CLIENTE C ON C.ID = V.Cliente " +
+                    "WHERE V.ID = @Id"
+                );
+
+                datos.setearParametro("@Id", id);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    Venta venta = new Venta();
+
+                    venta.Id = (int)datos.Lector["ID"];
+                    venta.NumeroFactura = (string)datos.Lector["NumeroFactura"];
+                    venta.Fecha = (DateTime)datos.Lector["Fecha"];
+                    venta.Total = (decimal)datos.Lector["Total"];
+
+                    venta.Cliente = new Cliente();
+                    venta.Cliente.Id = (int)datos.Lector["ClienteId"];
+                    venta.Cliente.Nombre = (string)datos.Lector["Nombre"];
+                    venta.Cliente.Apellido = (string)datos.Lector["Apellido"];
+
+                    return venta;
+                }
+
+                return null;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
 

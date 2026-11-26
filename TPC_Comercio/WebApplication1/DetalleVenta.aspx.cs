@@ -24,16 +24,25 @@ namespace WebApplication1
                 }
 
                 VentaNegocio negocio = new VentaNegocio();
+                Venta venta = negocio.buscar(idVenta);
 
-                List<VentaDetalle> detalles = negocio.listarDetalles(idVenta);
-
-                if (detalles.Count == 0)
+                if (venta == null)
                 {
-                    lblFactura.Text = "No se encontraron detalles para esta venta.";
+                    lblFactura.Text = "No se encontró la venta.";
                     return;
                 }
 
-                lblFactura.Text = "Factura: " + detalles[0].Venta.NumeroFactura;
+                lblFactura.Text = "Factura: " + venta.NumeroFactura;
+                lblCliente.Text = venta.Cliente.Nombre + " " + venta.Cliente.Apellido;
+                lblFecha.Text = venta.Fecha.ToString("dd/MM/yyyy HH:mm");
+
+                List<Dominio.VentaDetalle> detalles = negocio.listarDetalles(idVenta);
+
+                if (detalles.Count == 0)
+                {
+                    lblFactura.Text += " - Sin productos registrados.";
+                    return;
+                }
 
                 gvDetalle.DataSource = detalles;
                 gvDetalle.DataBind();
