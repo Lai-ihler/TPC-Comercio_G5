@@ -114,6 +114,30 @@ namespace WebApplication1
                     return;
                 }
 
+                ProductoNegocio productoNegocio = new ProductoNegocio();
+
+                foreach (VentaDetalle detalle in detalles)
+                {
+                    Producto productoActual = productoNegocio.buscar(detalle.Producto.Id);
+
+                    if (productoActual == null)
+                    {
+                        lblMensaje.Text = "No se encontró uno de los productos de la venta.";
+                        return;
+                    }
+
+                    int cantidadSolicitada = detalles
+                        .Where(x => x.Producto.Id == detalle.Producto.Id)
+                        .Sum(x => x.Cantidad);
+
+                    if (cantidadSolicitada > productoActual.StockActual)
+                    {
+                        lblMensaje.Text = "El stock de " + productoActual.Nombre +
+                            " cambió. Disponible: " + productoActual.StockActual + ".";
+                        return;
+                    }
+                }
+
                 Usuario usuario = (Usuario)Session["usuario"];
                 if (usuario == null || usuario.Id <= 0)
                 {
