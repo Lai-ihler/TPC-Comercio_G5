@@ -2,10 +2,7 @@ USE APP_WEB_DB;
 
 INSERT INTO PERFIL (Descripcion) VALUES
 ('Administrador'),
-('Vendedor'),
-('Deposito'),
-('Supervisor'),
-('Contador');
+('Vendedor');
 
 INSERT INTO CLIENTE
 (Nombre, Apellido, Dni, Email, Telefono, Direccion, Activo)
@@ -29,10 +26,7 @@ INSERT INTO USUARIO
 (NombreUsuario, Pass, Nombre, Apellido, Email, Perfil, Activo)
 VALUES
 ('admin01', 'Admin1234', 'Juan', 'Perez', 'admin@app.com', 1, 1),
-('vendedor01', 'Venta1234', 'Pedro', 'Gomez', 'pedro@app.com', 2, 1),
-('deposito01', 'Deposito1', 'Laura', 'Lopez', 'laura@app.com', 3, 1),
-('supervisor01', 'Super1234', 'Carlos', 'Diaz', 'carlos@app.com', 4, 1),
-('contador01', 'Conta1234', 'Maria', 'Ruiz', 'maria@app.com', 5, 1);
+('vendedor01', 'Venta1234', 'Pedro', 'Gomez', 'pedro@app.com', 2, 1);
 
 INSERT INTO MARCA (Descripcion, Activo) VALUES
 ('Samsung', 1),
@@ -59,36 +53,20 @@ VALUES
 
 INSERT INTO PRODUCTO_PROVEEDOR (Producto, Proveedor) VALUES
 (1, 1),
-(1, 4),
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5);
+(1, 4);
 
 INSERT INTO COMPRA (Fecha, Proveedor, Usuario, Total) VALUES
 (GETDATE(), 1, 1, 400000),
-(GETDATE(), 2, 2, 300000),
-(GETDATE(), 3, 3, 24000),
-(GETDATE(), 4, 4, 90000),
-(GETDATE(), 5, 5, 160000);
+(GETDATE(), 2, 2, 300000);
 
 INSERT INTO COMPRA_DETALLE (Compra, Producto, Cantidad, PrecioUnitario) VALUES
 (1, 1, 2, 200000),
-(2, 2, 2, 150000),
-(3, 3, 2, 12000),
-(4, 4, 2, 45000),
-(5, 5, 2, 80000);
+(2, 2, 2, 150000);
 
 INSERT INTO VENTA (NumeroFactura, Fecha, Cliente, Usuario, Total) VALUES
 ('FAC-0001', GETDATE(), 1, 2, 260000),
-('FAC-0002', GETDATE(), 2, 2, 195000),
-('FAC-0003', GETDATE(), 4, 1, 36000),
-('FAC-0004', GETDATE(), 5, 3, 60000),
-('FAC-0005', GETDATE(), 3, 4, 208000);
+('FAC-0002', GETDATE(), 2, 2, 195000);
 
 INSERT INTO VENTA_DETALLE (Venta, Producto, Cantidad, PrecioUnitario) VALUES
 (1, 1, 1, 260000),
-(2, 2, 1, 195000),
-(3, 3, 2, 18000),
-(4, 4, 1, 60000),
-(5, 5, 2, 104000);
+(2, 2, 1, 195000);
