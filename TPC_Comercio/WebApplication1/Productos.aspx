@@ -12,6 +12,8 @@
 
     <p>Listado de productos del comercio.</p>
 
+    <asp:Label ID="lblAlertaStock" runat="server" CssClass="alert alert-dark d-block" Visible="false" />
+
     <asp:Label ID="lblFiltro" runat="server" Text="Filtrar productos" />
     <asp:TextBox ID="txtFiltro" runat="server"
         CssClass="form-control mb-3"
@@ -22,12 +24,12 @@
         AutoGenerateColumns="False"
         DataKeyNames="Id"
         OnSelectedIndexChanged="gvListado_SelectedIndexChanged"
-        EmptyDataText="No hay productos para mostrar.">
+        EmptyDataText="No hay productos para mostrar.">       
         <Columns>
             <asp:BoundField DataField="Id" HeaderText="ID" />
             <asp:BoundField DataField="Codigo" HeaderText="Código" />
             <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-             <asp:BoundField DataField="Marca.Descripcion" HeaderText="Marca" />
+            <asp:BoundField DataField="Marca.Descripcion" HeaderText="Marca" />
             <asp:BoundField DataField="Categoria.Descripcion" HeaderText="Categoria" />
             <asp:BoundField DataField="Proveedores" HeaderText="Proveedores" />
             <asp:BoundField DataField="StockActual" HeaderText="Stock actual" />

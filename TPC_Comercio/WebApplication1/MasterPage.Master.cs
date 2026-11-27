@@ -22,6 +22,15 @@ namespace WebApplication1
             if (Seguridad.sesionActiva(Session["usuario"]))
             {
                 Usuario usuario = (Usuario)Session["usuario"];
+                UsuarioNegocio negocio = new UsuarioNegocio();
+                List<Usuario> lista = negocio.listar(usuario.Id.ToString());
+                if (lista.Count == 0 || !lista[0].Activo)
+                {
+                    Session.Clear();
+                    Session.Add("error", "Tu usuario fue dado de baja. Comunicate con el administrador.");
+                    Response.Redirect("Error.aspx", false);
+                    return;
+                }
                 lblUsuario.Text = usuario.NombreUsuario;
             }
             if (Seguridad.LoginActivo && Seguridad.sesionActiva(Session["usuario"]) && !Seguridad.esAdmin(Session["usuario"]))

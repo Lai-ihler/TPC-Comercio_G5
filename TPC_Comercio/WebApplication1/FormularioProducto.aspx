@@ -77,8 +77,8 @@
 
                     <asp:TextBox ID="txtStockMinimo" runat="server" CssClass="form-control" />
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtStockMinimo" ErrorMessage="El stock minimo es obligatorio." CssClass="text-danger" Display="Dynamic" />
-
-                    <asp:RegularExpressionValidator runat="server" ControlToValidate="txtStockMinimo" ValidationExpression="^[0-9]+$" ErrorMessage="El stock minimo debe ser un numero entero." CssClass="text-danger" Display="Dynamic" />
+                    <asp:RegularExpressionValidator runat="server" ControlToValidate="txtStockMinimo" ValidationExpression="^[1-9]+$" ErrorMessage="El stock minimo debe ser un numero entero." CssClass="text-danger" Display="Dynamic" />
+                    <asp:RegularExpressionValidator runat="server" ControlToValidate="txtStockMinimo" ValidationExpression="^\d{1,7}$" ErrorMessage="Ingrese 7 dígitos o menos." CssClass="text-danger" Display="Dynamic" />
                     <asp:Label ID="lblErrorStockMinimo" runat="server" CssClass="text-danger" />
                 </div>
 
@@ -90,6 +90,7 @@
                     <asp:TextBox ID="txtPorcentajeGanancia" runat="server" CssClass="form-control" />
                     <asp:RequiredFieldValidator runat="server" ControlToValidate="txtPorcentajeGanancia" ErrorMessage="El porcentaje es obligatorio." CssClass="text-danger" Display="Dynamic" />
                    <asp:RegularExpressionValidator runat="server" ControlToValidate="txtPorcentajeGanancia" ValidationExpression="^[0-9]+$" ErrorMessage="Ingresa un porcentaje numerico valido." CssClass="text-danger" Display="Dynamic" />
+                    <asp:RangeValidator runat="server" ControlToValidate="txtPorcentajeGanancia" Type="Integer" MinimumValue="0" MaximumValue="1000" ErrorMessage="El porcentaje debe estar entre 0 y 1000." CssClass="text-danger" Display="Dynamic" />
                     <asp:Label ID="lblErrorPorcentajeGanancia" runat="server" CssClass="text-danger" />
                 </div>
 

@@ -19,9 +19,15 @@ namespace WebApplication1
                 Session["listaProductos"] = negocio.listar();
                 gvListado.DataSource = Session["listaProductos"];
                 gvListado.DataBind();
+                List<Producto> stockBajo = ((List<Producto>)Session["listaProductos"]).FindAll(x => x.Activo && x.StockActual < x.StockMinimo);
+                if (stockBajo.Count > 0)
+                {
+                    lblAlertaStock.Text = stockBajo.Count + " producto/s con stoc por debajo del minimo: " + string.Join(", ", stockBajo.Select(x => x.Nombre));
+                    lblAlertaStock.Visible = true;
+                }
             }
         }
-
+        
         protected void gvListado_SelectedIndexChanged(object sender, EventArgs e)
         {
             string id = gvListado.SelectedDataKey.Value.ToString();

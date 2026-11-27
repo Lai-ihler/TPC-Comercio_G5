@@ -12,7 +12,8 @@
             CssClass="btn btn-primary">
             Nuevo Proveedor
         </asp:HyperLink>
-
+        <br />
+        <br />
         <asp:Label ID="lblFiltro" runat="server" Text="Filtrar proveedores" />
 
         <asp:TextBox ID="txtFiltro" runat="server"

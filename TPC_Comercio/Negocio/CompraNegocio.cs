@@ -136,5 +136,44 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public Compra buscar(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(
+                    "SELECT C.ID, C.Fecha, C.Total, " +
+                    "P.ID AS ProveedorId, P.RazonSocial AS PROVEEDOR " +
+                    "FROM COMPRA C " +
+                    "INNER JOIN PROVEEDOR P ON P.ID = C.Proveedor " +
+                    "WHERE C.ID = @Id"
+                );
+
+                datos.setearParametro("@Id", id);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                {
+                    Compra compra = new Compra();
+
+                    compra.Id = (int)datos.Lector["ID"];
+                    compra.Fecha = (DateTime)datos.Lector["Fecha"];
+                    compra.Total = (decimal)datos.Lector["Total"];
+
+                    compra.Proveedor = new Proveedor();
+                    compra.Proveedor.Id = (int)datos.Lector["ProveedorId"];
+                    compra.Proveedor.RazonSocial = (string)datos.Lector["PROVEEDOR"];
+
+                    return compra;
+                }
+
+                return null;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

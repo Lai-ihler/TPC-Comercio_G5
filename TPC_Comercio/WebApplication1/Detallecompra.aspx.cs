@@ -16,19 +16,33 @@ namespace WebApplication1
             if (!IsPostBack)
             {
                 int idCompra;
+
                 if (!int.TryParse(Request.QueryString["id"], out idCompra) || idCompra <= 0)
                 {
-                    Response.Redirect("Compras.aspx", false);
+                    Response.Redirect("Compras.aspx");
                     return;
                 }
 
                 CompraNegocio negocio = new CompraNegocio();
+                Compra compra = negocio.buscar(idCompra);
+
+                if (compra == null)
+                {
+                    Response.Redirect("Compras.aspx");
+                    return;
+                }
+
+                lblProveedor.Text = compra.Proveedor.RazonSocial;
+                lblFecha.Text = compra.Fecha.ToString("dd/MM/yyyy HH:mm");
+
                 List<CompraDetalle> detalles = negocio.listarDetalles(idCompra);
 
                 gvDetalle.DataSource = detalles;
                 gvDetalle.DataBind();
 
-                lblTotal.Text = detalles.Sum(x => x.Subtotal).ToString("C");
+                decimal total = detalles.Sum(x => x.Subtotal);
+
+                lblTotal.Text = total.ToString("C");
             }
         }
     }
