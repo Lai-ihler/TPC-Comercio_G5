@@ -36,6 +36,12 @@
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:BoundField DataField="Total" HeaderText="Total" />
+                <asp:TemplateField HeaderText="Detalle">
+                    <ItemTemplate>
+                        <asp:HyperLink ID="lnkDetalle" runat="server" Text="Ver" CssClass="btn btn-sm btn-outline-primary"
+                            NavigateUrl='<%# "DetalleCompra.aspx?id=" + Eval("Id") %>' />
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
 
         </asp:GridView>

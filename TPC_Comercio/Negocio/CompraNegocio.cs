@@ -96,6 +96,45 @@ namespace Negocio
                     datosDetalle.cerrarConexion();
                 }
             }
+
+        }
+        public List<CompraDetalle> listarDetalles(int idCompra)
+        {
+            List<CompraDetalle> lista = new List<CompraDetalle>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(
+                    "SELECT CD.ID, CD.Producto, P.Nombre, CD.Cantidad, CD.PrecioUnitario " +
+                    "FROM COMPRA_DETALLE CD " +
+                    "INNER JOIN PRODUCTO P ON P.ID = CD.Producto " +
+                    "WHERE CD.Compra = @IdCompra"
+                );
+                datos.setearParametro("@IdCompra", idCompra);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    CompraDetalle detalle = new CompraDetalle();
+                    detalle.Id = (int)datos.Lector["ID"];
+                    detalle.Cantidad = (int)datos.Lector["Cantidad"];
+                    detalle.PrecioUnitario = (decimal)datos.Lector["PrecioUnitario"];
+                    detalle.Subtotal = detalle.Cantidad * detalle.PrecioUnitario;
+
+                    detalle.Producto = new Producto();
+                    detalle.Producto.Id = (int)datos.Lector["Producto"];
+                    detalle.Producto.Nombre = (string)datos.Lector["Nombre"];
+
+                    lista.Add(detalle);
+                }
+
+                return lista;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
         }
     }
 }
